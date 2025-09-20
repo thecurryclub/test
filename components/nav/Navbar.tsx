@@ -129,7 +129,7 @@ export default function Navbar() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex h-16 items-center justify-between">
             <div className="flex items-center gap-3">
-              <Link href="/" className="flex items-center gap-2"><img src="/TruFlavors-Web.png" alt="Tru Flavors" className="h-10 w-auto" /></Link>
+              <Link href={{ pathname: "/" }} className="flex items-center gap-2"><img src="/TruFlavors-Web.png" alt="Tru Flavors" className="h-10 w-auto" /></Link>
             </div>
 
             <nav className="hidden md:flex items-center gap-2">
@@ -179,7 +179,7 @@ export default function Navbar() {
                             <div className="text-sm text-orange-900/90">
                               <span className="font-semibold">New:</span> Culture Boxes — a surprise global tasting each month ✈️
                             </div>
-                            <Link className="text-sm font-medium text-orange-800 hover:text-orange-900 underline underline-offset-4" href="/culture-box" onClick={() => setActive(null)}>
+                            <Link className="text-sm font-medium text-orange-800 hover:text-orange-900 underline underline-offset-4" href={{ pathname: "/subscribe" }} onClick={() => setActive(null)}>
                               Explore
                             </Link>
                           </div>
