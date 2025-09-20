@@ -1,5 +1,5 @@
 import { Montserrat } from "next/font/google";
-export const runtime = "nodejs";
+export const runtime = "edge";
 import type { Metadata } from "next";
 import "./globals.css";
 import CookieConsent from "@/components/CookieConsent";
