@@ -1,12 +1,8 @@
 // app/how-it-works/page.tsx
-"use client";
-
-import { useEffect } from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
+import HashScroller from "@/components/HashScroller";
 
-// --- SEO ---
 export const metadata: Metadata = {
   title: "How It Works — Tru Flavors",
   description:
@@ -22,22 +18,6 @@ export const metadata: Metadata = {
 };
 
 export default function HowItWorksPage() {
-  const params = useSearchParams();
-
-  // Smooth-scroll to a section if ?hash=... is present, e.g. ?hash=storage
-  useEffect(() => {
-    const hash = params.get("hash");
-    if (!hash) return;
-    const el = document.getElementById(hash);
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth", block: "start" });
-      // Brief highlight
-      el.classList.add("ring-2", "ring-brand");
-      const t = setTimeout(() => el.classList.remove("ring-2", "ring-brand"), 1600);
-      return () => clearTimeout(t);
-    }
-  }, [params]);
-
   // HowTo JSON-LD
   const howtoJsonLd = {
     "@context": "https://schema.org",
@@ -62,7 +42,7 @@ export default function HowItWorksPage() {
       {
         "@type": "HowToStep",
         name: "Heat or Cook",
-        text: "RTE: microwave or stovetop until hot. RTC: sauté protein/veg, add base, simmer to finish.",
+        text: "RTE: microwave/stovetop until hot. RTC: sauté protein/veg, add base, simmer to finish.",
       },
       {
         "@type": "HowToStep",
@@ -74,6 +54,9 @@ export default function HowItWorksPage() {
 
   return (
     <section className="container-max py-10">
+      {/* Smooth-scroll if ?hash=storage etc. */}
+      <HashScroller param="hash" />
+
       {/* Breadcrumbs */}
       <nav className="text-sm text-gray-500 mb-6">
         <Link className="link" href="/">Home</Link>
@@ -91,7 +74,7 @@ export default function HowItWorksPage() {
             </h1>
             <p className="mt-4 text-gray-600 leading-relaxed">
               Tru Flavors keeps dinner simple: choose a kit, heat or cook,
-              and plate. Our ready-to-eat curries are typically ready in ≤ 5 minutes,
+              and plate. Ready-to-eat curries are typically ready in ≤ 5 minutes,
               while ready-to-cook bases get you a fresh, balanced meal in 10–20.
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
