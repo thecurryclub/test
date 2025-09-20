@@ -49,7 +49,7 @@ const NAV: NavItem[] = [
       {
         heading: "Science",
         links: [
-          { label: "Our Science", href: { pathname: "/standards" } },
+          { label: "Our Science", href: { pathname: "/science" } },
           { label: "Gut Health 101", href: { pathname: "/gut-health" } },
           { label: "Ingredients We Choose", href: { pathname: "/standards" } }
         ]
