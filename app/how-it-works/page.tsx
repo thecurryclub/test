@@ -226,9 +226,6 @@ export default function HowItWorksPage() {
               <p className="mt-3 text-xs text-gray-500">Representative imagery.</p>
             </div>
           </div>
-          <div className="mt-6">
-            <Link href="/how-it-works?hash=storage" className="link">Direct link to this section →</Link>
-          </div>
         </div>
       </section>
 
