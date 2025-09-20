@@ -13,7 +13,9 @@ export default function ProductDetail({ params }: { params: { id: string } }) {
   return (
     <section className="container-max py-16">
       <div className="grid md:grid-cols-2 gap-10">
-        <div className="rounded-2xl bg-brand-light h-64 md:h-80 flex items-center justify-center">Product image</div>
+        <div className="rounded-2xl h-64 md:h-80 flex items-center justify-center overflow-hidden">
+          {p.image && <img src={p.image} alt={p.name} className="w-full h-full object-cover" />}
+        </div>
         <div>
           <h1 className="text-3xl font-bold">{p.name}</h1>
           <p className="mt-2 text-gray-700">{p.copy}</p>
