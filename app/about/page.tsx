@@ -170,13 +170,13 @@ export default function AboutPage() {
           <ol className="mt-6 relative border-l pl-6">
             {[
               {
-                date: "2023–2024",
+                date: "2020–2022",
                 title: "Foundations & R&D",
                 desc:
                   "Prototyped heat-and-eat curry kits, validated with early customers, and defined clean-label standards.",
               },
               {
-                date: "2024–2025",
+                date: "2022–2024",
                 title: "Brand & Product Expansion",
                 desc:
                   "Launched Tru Flavors identity, expanded vegetarian and dairy-free lines, and built supply partnerships.",
