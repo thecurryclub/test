@@ -3,9 +3,9 @@ import Section from "@/components/ui/Section";
 
 export default function GoalStrip() {
   const items = [
-    {label:"Digestive comfort", href:"/products?goal=digestive"},
-    {label:"Weight-friendly", href:"/products?goal=weight"},
-    {label:"Under 5 minutes", href:"/products?goal=sub5"},
+    {label:"Digestive comfort", href:{pathname:"/products", query:{goal:"digestive"}}},
+    {label:"Weight-friendly", href:{pathname:"/products", query:{goal:"weight"}}},
+    {label:"Under 5 minutes", href:{pathname:"/products", query:{goal:"sub5"}}},
   ];
   return (
     <Section className="py-8">
