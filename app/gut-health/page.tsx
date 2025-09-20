@@ -1,151 +1,324 @@
-export const metadata = {
-  title: "Gut Health 101 — Tru Flavors",
-  description: "Simple, science‑aware guidance on why your gut matters, how to eat for it, and how Tru Flavors can help.",
+// app/gut-health/page.tsx
+import type { Metadata } from "next";
+import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "Gut Health — Tru Flavors",
+  description:
+    "Simple guidance on eating for digestive comfort without sacrificing taste. See how Tru Flavors designs products with a gut-friendly approach.",
+  alternates: { canonical: "/gut-health" },
+  openGraph: {
+    title: "Gut Health — Tru Flavors",
+    description:
+      "Eat well, feel well. Our practical approach to gut-friendly cooking and ready-to-heat curries.",
+    url: "https://truflavors.org/gut-health",
+    images: [{ url: "/images/og.png" }],
+  },
 };
 
-const SECTIONS = [
-  { id: "why-your-gut-matters", label: "Why your gut matters" },
-  { id: "fiber-variety-ferments", label: "Fiber • Variety • Ferments" },
-  { id: "pre-pro-postbiotics", label: "Pre/Pro/Postbiotics" },
-  { id: "star-ingredients", label: "Star ingredients" },
-  { id: "what-to-limit", label: "What to limit" },
-  { id: "lifestyle-support", label: "Lifestyle support" },
-  { id: "troubleshooting", label: "Troubleshooting" },
-  { id: "balanced-plate", label: "Balanced plate" },
-  { id: "how-tru-flavors-helps", label: "How Tru Flavors helps" },
-  { id: "faq", label: "FAQ" },
-];
-
-function AnchorToc() {
-  return (
-    <nav aria-label="On this page" className="sticky top-24 hidden h-[calc(100vh-8rem)] w-64 shrink-0 overflow-auto pr-4 md:block">
-      <ul className="space-y-1">
-        {SECTIONS.map(s => (
-          <li key={s.id}>
-            <a href={`#${s.id}`} className="block rounded-lg px-2 py-1.5 text-sm text-slate-700 hover:bg-orange-50 hover:text-orange-700">
-              {s.label}
-            </a>
-          </li>
-        ))}
-      </ul>
-    </nav>
-  );
-}
-
-function H2({ id, children }: { id: string; children: React.ReactNode }) {
-  return (
-    <h2 id={id} className="scroll-mt-28 text-2xl md:text-3xl font-bold tracking-tight">
-      {children}
-    </h2>
-  );
-}
-
-function Card({ children }: { children: React.ReactNode }) {
-  return <div className="rounded-2xl border bg-white p-5 shadow-soft">{children}</div>;
-}
+// Optional FAQ JSON-LD
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: [
+    {
+      "@type": "Question",
+      name: "What does “gut-friendly” mean at Tru Flavors?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text:
+          "We focus on balanced spice profiles, cleaner fats, and clear labeling (including dairy-free and gluten-free options) to reduce common triggers while keeping flavor.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Are your products low-FODMAP?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text:
+          "Some items are more FODMAP-friendly than others. Tolerance varies by person, so we recommend starting with smaller portions and checking labels for garlic/onion or dairy.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "How fast can I prepare your meals?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text:
+          "Ready-to-eat options typically heat in ≤ 5 minutes; ready-to-cook bases usually take 10–20 minutes depending on the protein or vegetables you add.",
+      },
+    },
+  ],
+};
 
 export default function GutHealthPage() {
   return (
-    <section className="container-max mx-auto px-6 md:px-8 py-10">
-            {/* HERO */}
-      <div className="relative overflow-hidden rounded-3xl border bg-gradient-to-br from-orange-50 via-white to-amber-50 p-8 md:p-12 shadow-soft">
-        <div className="absolute -left-10 -top-10 h-40 w-40 rounded-full bg-orange-200/30 blur-2xl" aria-hidden="true" />
-        <div className="absolute -right-10 -bottom-10 h-48 w-48 rounded-full bg-amber-200/30 blur-2xl" aria-hidden="true" />
-        <p className="text-xs font-semibold uppercase tracking-wider text-orange-700">Gut Health 101</p>
-        <h1 className="mt-2 text-3xl md:text-5xl font-bold tracking-tight text-slate-900">
-          Build a happier gut — one simple plate at a time
-        </h1>
-        <p className="mt-3 max-w-3xl text-base md:text-lg leading-relaxed text-slate-700">
-          No scare tactics. No fads. Just practical habits that support digestion, energy, and long‑term health.
-        </p>
+    <section className="container-max py-10">
+      {/* Breadcrumbs */}
+      <nav className="text-sm text-gray-500 mb-6">
+        <Link href="/" className="link">Home</Link>
+        <span className="mx-2">/</span>
+        <span className="text-gray-700">Gut Health</span>
+      </nav>
+
+      {/* HERO */}
+      <header className="rounded-3xl border bg-white p-8 md:p-12">
+        <div className="grid gap-8 md:grid-cols-2 md:items-center">
+          <div>
+            <h1 className="text-3xl md:text-4xl font-bold tracking-tight">
+              Eat well, <span className="text-brand">feel well</span> — without giving up flavor.
+            </h1>
+            <p className="mt-4 text-gray-600 leading-relaxed">
+              Tru Flavors takes a practical approach to gut health: thoughtful spices, cleaner fats,
+              and clear labeling — so everyday meals are both delicious and easier to digest.
+            </p>
+            <div className="mt-6 flex flex-wrap gap-3">
+              <span className="badge">Balanced spice</span>
+              <span className="badge">No seed oils</span>
+              <span className="badge">Gluten-free options</span>
+              <span className="badge">Dairy-free options</span>
+              <span className="badge">Vegetarian options</span>
+              <span className="badge">≤ 5 min (RTE)</span>
+            </div>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Link href="/products" className="btn btn-primary">Shop Products</Link>
+              <Link href="/standards" className="btn btn-ghost">Our Standards</Link>
+            </div>
+          </div>
+
+          <div className="relative">
+            <div className="rounded-3xl overflow-hidden border bg-brand-light/40">
+              <img
+                src="/images/gut/hero.jpg"
+                alt="Colorful, balanced curry plate designed for digestive comfort"
+                className="w-full h-auto"
+              />
+            </div>
+            <div className="absolute -bottom-4 -right-4 hidden md:block">
+              <div className="rounded-2xl bg-white/80 backdrop-blur border px-4 py-3 shadow-sm">
+                <p className="text-xs text-gray-500">Typical prep (RTE)</p>
+                <p className="text-lg font-semibold">≤ 5 minutes</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      {/* IN-PAGE NAV */}
+      <div className="mt-8 overflow-x-auto">
+        <ul className="flex gap-3 text-sm">
+          {[
+            { href: "#overview", label: "Overview" },
+            { href: "#eat", label: "What to Eat" },
+            { href: "#limit", label: "What to Limit" },
+            { href: "#approach", label: "Our Approach" },
+            { href: "#faq", label: "FAQs" },
+          ].map((i) => (
+            <li key={i.href}>
+              <a href={i.href} className="badge hover:bg-gray-50">{i.label}</a>
+            </li>
+          ))}
+        </ul>
       </div>
 
-      <div className="mt-10 md:flex md:items-start md:gap-10">
-        <AnchorToc />
+      {/* OVERVIEW */}
+      <section id="overview" className="mt-12">
+        <div className="rounded-3xl border bg-white p-6 md:p-8">
+          <h2 className="text-xl font-semibold">A practical view of gut health</h2>
+          <div className="mt-4 grid gap-6 md:grid-cols-2">
+            <p className="text-gray-700 leading-relaxed">
+              Digestive comfort is highly individual. Instead of promising a single “perfect” diet,
+              we build products around principles that help many people: balanced spice levels,
+              mindful aromatics, cleaner fats, and clear labels for common triggers.
+            </p>
+            <ul className="text-gray-700 leading-relaxed space-y-2">
+              <li>• Moderate heat; layer flavor with herbs and gentle spices.</li>
+              <li>• Prefer ghee/olive oil over seed oils in our recipes.</li>
+              <li>• Clear flags for <em>dairy-free</em> and <em>gluten-free</em> options.</li>
+              <li>• Practical cooking times for weekday habits.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
 
-        <article className="prose prose-slate max-w-none md:flex-1 prose-p:my-4 prose-p:leading-relaxed prose-li:my-1 prose-headings:tracking-tight">
-          <H2 id="why-your-gut-matters">Why your gut matters</H2>
-          <p>Your gut is home to trillions of microbes that help digest food, train immunity, and produce beneficial compounds. Diversity and balance tend to correlate with better outcomes, while ultra‑refined diets can work against that balance.</p>
+      {/* WHAT TO EAT */}
+      <section id="eat" className="mt-12">
+        <div className="rounded-3xl border bg-white p-6 md:p-8">
+          <h2 className="text-xl font-semibold">What tends to work well</h2>
+          <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {[
+              {
+                title: "Gentle aromatics",
+                desc: "Ginger, green herbs, curry leaves, fennel — bright flavor with lighter impact.",
+              },
+              {
+                title: "Comforting bases",
+                desc: "Tomato-coconut blends, spinach/greens bases, slow-cooked lentils (in moderation).",
+              },
+              {
+                title: "Lean proteins & veg",
+                desc: "Chicken, fish, tofu, paneer, and non-cruciferous veg for easy pairing.",
+              },
+              {
+                title: "Cleaner fats",
+                desc: "Ghee and olive oil as primary fats in our recipes and kits.",
+              },
+              {
+                title: "Smart heat",
+                desc: "Flavor before fire; use heat as an accent, not a dare.",
+              },
+              {
+                title: "Portion awareness",
+                desc: "Start smaller, add more if comfortable — especially with new spices.",
+              },
+            ].map((c) => (
+              <article key={c.title} className="rounded-2xl border p-5 bg-white">
+                <h3 className="font-semibold">{c.title}</h3>
+                <p className="mt-2 text-sm text-gray-600">{c.desc}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
 
-          <div className="my-6 grid gap-4 md:grid-cols-3">
-            <Card><p className="m-0 text-sm"><strong>Digestion</strong><br/>Better breakdown & absorption.</p></Card>
-            <Card><p className="m-0 text-sm"><strong>Immune tone</strong><br/>A calmer, more resilient baseline.</p></Card>
-            <Card><p className="m-0 text-sm"><strong>Metabolic support</strong><br/>Fiber‑rich meals for steadier energy.</p></Card>
+      {/* WHAT TO LIMIT */}
+      <section id="limit" className="mt-12">
+        <div className="rounded-3xl border bg-white p-6 md:p-8">
+          <h2 className="text-xl font-semibold">What to limit (for many people)</h2>
+          <div className="mt-6 grid gap-6 md:grid-cols-2">
+            <ul className="space-y-3 text-sm text-gray-700 leading-relaxed">
+              <li>• Very hot chilies; consider milder peppers or use less.</li>
+              <li>• Heavy onion/garlic loads if you’re sensitive (FODMAP-aware).</li>
+              <li>• Ultra-rich dairy bases; choose coconut or dairy-free variants.</li>
+              <li>• Highly processed seed oils.</li>
+            </ul>
+            <div className="rounded-2xl overflow-hidden border bg-brand-light/30 p-4">
+              <img
+                src="/images/gut/limit.jpg"
+                alt="Gentle spice mise en place"
+                className="w-full h-auto rounded-xl"
+              />
+              <p className="mt-3 text-xs text-gray-500">
+                Not medical advice — always follow your clinician’s guidance.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* OUR APPROACH */}
+      <section id="approach" className="mt-12">
+        <div className="rounded-3xl border bg-white p-6 md:p-8">
+          <h2 className="text-xl font-semibold">How Tru Flavors designs for comfort</h2>
+          <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {[
+              {
+                title: "Balanced spice profiles",
+                desc: "Flavor-forward blends that emphasize aroma and depth over raw heat.",
+              },
+              {
+                title: "Cleaner fat choices",
+                desc: "We avoid seed oils; ghee/olive oil are our defaults where possible.",
+              },
+              {
+                title: "Transparent labels",
+                desc: "Clear callouts for dairy-free, gluten-free, and other common sensitivities.",
+              },
+              {
+                title: "Iterative R&D",
+                desc: "We refine based on customer feedback and kitchen testing.",
+              },
+            ].map((s) => (
+              <article key={s.title} className="rounded-2xl border p-5">
+                <h3 className="font-semibold">{s.title}</h3>
+                <p className="mt-2 text-sm text-gray-600">{s.desc}</p>
+              </article>
+            ))}
           </div>
 
-          <H2 id="fiber-variety-ferments">Fiber • Variety • Ferments</H2>
-          <p>Patterns matter more than perfection. Aim for:</p>
-          <ul>
-            <li><strong>Fiber</strong>: veggies, legumes, nuts — gradual increases are kinder on digestion.</li>
-            <li><strong>Variety</strong>: mix plant colors and types each week.</li>
-            <li><strong>Ferments</strong>: small, regular servings (e.g., unsweetened yogurt, kefir, sauerkraut).</li>
-          </ul>
-
-          <H2 id="pre-pro-postbiotics">Pre/Pro/Postbiotics</H2>
-          <ul>
-            <li><strong>Prebiotics</strong>: fibers that feed microbes (onion, garlic, chicory, asparagus, green banana flour).</li>
-            <li><strong>Probiotics</strong>: live cultures from fermented foods.</li>
-            <li><strong>Postbiotics</strong>: beneficial end‑products like short‑chain fatty acids (SCFAs), supported by fiber‑rich meals.</li>
-          </ul>
-
-          <H2 id="star-ingredients">Star ingredients</H2>
-          <div className="grid gap-4 md:grid-cols-2">
-            <Card><p className="m-0 text-sm"><strong>Olive oil</strong> over seed oils for everyday cooking.</p></Card>
-            <Card><p className="m-0 text-sm"><strong>Legumes & lentils</strong> as weekly staples.</p></Card>
-            <Card><p className="m-0 text-sm"><strong>Leafy greens & herbs</strong> for polyphenols and micronutrients.</p></Card>
-            <Card><p className="m-0 text-sm"><strong>Spices</strong> like turmeric, cumin, ginger, coriander.</p></Card>
+          <div className="mt-6 flex flex-wrap gap-3">
+            <Link href="/products/collections" className="btn btn-primary">Browse Collections</Link>
+            <Link href="/ingredients" className="btn btn-ghost">Explore Ingredients</Link>
           </div>
+        </div>
+      </section>
 
-          <H2 id="what-to-limit">What to limit</H2>
-          <ul>
-            <li>Excess added sugars & refined flours.</li>
-            <li>Highly processed foods with long additive lists.</li>
-            <li>Frequent deep‑fried meals.</li>
-          </ul>
-
-          <H2 id="lifestyle-support">Lifestyle support</H2>
-          <ul>
-            <li><strong>Sleep</strong>: aim for consistent timing and 7–9 hours.</li>
-            <li><strong>Movement</strong>: gentle daily activity; add resistance work 2–3× weekly.</li>
-            <li><strong>Stress</strong>: simple breathwork, walks, sunlight, and time with people you like.</li>
-          </ul>
-
-          <H2 id="troubleshooting">Troubleshooting</H2>
-          <p>New to fiber or legumes? Start small, go slow, and hydrate. If you have known intolerances or medical conditions, check with your clinician for personalized advice.</p>
-
-          <H2 id="balanced-plate">Balanced plate</H2>
-          <div className="rounded-2xl border p-5 bg-white shadow-soft not-prose">
-            <ol className="list-decimal pl-5 text-sm text-slate-700 space-y-1">
-              <li>Half plate colorful veg & greens</li>
-              <li>Quarter plate protein (fish, eggs, tofu, legumes, or poultry)</li>
-              <li>Quarter plate smart carbs (beans/lentils, root veg, or modest whole grains)</li>
-              <li>Olive oil + herbs + spices</li>
-            </ol>
+      {/* FAQ */}
+      <section id="faq" className="mt-12">
+        <div className="rounded-3xl border bg-white p-6 md:p-8">
+          <h2 className="text-xl font-semibold">FAQs</h2>
+          <div className="mt-6 grid gap-4">
+            {[
+              {
+                q: "What does “gut-friendly” mean here?",
+                a: "We design for balanced spices, cleaner fats, and clarity on potential triggers (e.g., dairy, gluten). It’s a practical, flavor-first approach — not a medical protocol.",
+              },
+              {
+                q: "Are any items FODMAP-friendly?",
+                a: "Some will be easier for sensitive eaters; tolerance is individual. Start with smaller portions and check labels for onion/garlic or dairy.",
+              },
+              {
+                q: "Which product should I try first?",
+                a: "Ready-to-eat Kerala Coconut Pepper or Punjabi Chana are popular gentle starts. For cooking, Saag/Palak Base or Korma DF are great weeknight options.",
+              },
+            ].map((f) => (
+              <details key={f.q} className="rounded-xl border p-4 bg-white">
+                <summary className="cursor-pointer font-medium">{f.q}</summary>
+                <p className="mt-2 text-sm text-gray-600">{f.a}</p>
+              </details>
+            ))}
           </div>
+        </div>
+      </section>
 
-          <H2 id="how-tru-flavors-helps">How Tru Flavors helps</H2>
-          <p>We craft <em>ready‑to‑heat</em> meals and <em>cook‑at‑home</em> bases that emphasize plants, olive oil, and spice‑led flavor — making it easier to build a gut‑friendly plate in minutes.</p>
-          <ul>
-            <li>Options aligned with gluten‑free, dairy‑free, and lectin‑light preferences.</li>
-            <li>Pressure‑cooked and sealed for freshness; no artificial flavors or colors.</li>
-            <li>Clear labels and simple instructions.</li>
-          </ul>
+      {/* CTA STRIP */}
+      <section className="mt-12">
+        <div className="rounded-3xl border bg-gradient-to-br from-brand/10 to-brand-light/40 p-6 md:p-8">
+          <div className="grid gap-6 md:grid-cols-2 md:items-center">
+            <div>
+              <h2 className="text-xl font-semibold">Ready for simple, good-for-you meals?</h2>
+              <p className="mt-2 text-gray-700">
+                Explore our ready-to-eat curries or cook with our balanced bases.
+              </p>
+              <div className="mt-6 flex flex-wrap gap-3">
+                <Link href="/products/ready-to-eat" className="btn btn-primary">Ready to Eat</Link>
+                <Link href="/products/ready-to-cook" className="btn btn-ghost">Ready to Cook</Link>
+              </div>
+            </div>
+            <div className="rounded-2xl overflow-hidden border bg-white">
+              <img
+                src="/images/gut/cta.jpg"
+                alt="Comforting curry bowls, plated"
+                className="w-full h-auto"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
 
-          <H2 id="faq">FAQ</H2>
-          <details className="rounded-xl border p-4 bg-white shadow-soft">
-            <summary className="cursor-pointer font-medium">Are your meals suitable for a low‑FODMAP approach?</summary>
-            <div className="mt-2 text-sm text-slate-700">Some products are gentler by design; always check the ingredients list and start with small portions to gauge your response.</div>
-          </details>
-          <details className="mt-3 rounded-xl border p-4 bg-white shadow-soft">
-            <summary className="cursor-pointer font-medium">Do you use seed oils?</summary>
-            <div className="mt-2 text-sm text-slate-700">We focus on olive oil‑forward recipes. For any products that use other oils, we clearly state them on the label.</div>
-          </details>
-          <details className="mt-3 rounded-xl border p-4 bg-white shadow-soft">
-            <summary className="cursor-pointer font-medium">How do I start if I’m new to fiber?</summary>
-            <div className="mt-2 text-sm text-slate-700">Increase slowly, drink water, and pair with cooked vegetables, soups, and stews. Adjust to your comfort.</div>
-          </details>
-        </article>
-      </div>
+      {/* Notes */}
+      <p className="mt-6 text-xs text-gray-500">
+        *Content is for general information only and is not a substitute for professional medical advice.
+      </p>
+
+      {/* JSON-LD */}
+      <script
+        type="application/ld+json"
+        suppressHydrationWarning
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
     </section>
   );
 }
+
+/**
+ * Expected utility classes in your Tailwind setup (match About page):
+ * .container-max { @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8; }
+ * .btn { @apply inline-flex items-center justify-center rounded-full px-4 py-2 text-sm font-medium border; }
+ * .btn-primary { @apply border-brand bg-brand text-white hover:opacity-90; }
+ * .btn-ghost { @apply border-gray-300 text-gray-800 hover:bg-gray-100; }
+ * .badge { @apply inline-flex items-center rounded-full border px-2.5 py-1 text-xs font-medium bg-white; }
+ * .text-brand { @apply text-amber-600; }     // adjust to your brand color token
+ * .bg-brand { @apply bg-amber-600; }         // adjust to your brand color token
+ * .bg-brand-light { @apply bg-amber-100; }   // adjust as needed
+ */
