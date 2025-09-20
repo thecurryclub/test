@@ -2,10 +2,10 @@ import Section from "@/components/ui/Section";
 import Link from "next/link";
 
 const regions = [
-  { name: "Kerala Coast", href: "/products?tag=coastal", bg: "bg-brand-light" },
-  { name: "Punjabi Classics", href: "/products?tag=punjabi", bg: "bg-brand/10" },
-  { name: "Goan Tamarind", href: "/products?tag=goan", bg: "bg-brand-light" },
-  { name: "Thai Green", href: "/products?tag=thai", bg: "bg-brand/10" },
+  { name: "Kerala Coast", href: {pathname:"/products", query:{tag:"coastal"}}, bg: "bg-brand-light" },
+  { name: "Punjabi Classics", href: {pathname:"/products", query:{tag:"punjabi"}}, bg: "bg-brand/10" },
+  { name: "Goan Tamarind", href: {pathname:"/products", query:{tag:"goan"}}, bg: "bg-brand-light" },
+  { name: "Thai Green", href: {pathname:"/products", query:{tag:"thai"}}, bg: "bg-brand/10" },
 ];
 
 export default function RegionalTiles() {
