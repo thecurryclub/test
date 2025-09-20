@@ -1,42 +1,172 @@
-export const metadata = { title: "Recipes & Pairings | Tru Flavors" };
+// app/recipes/page.tsx
+import type { Metadata } from "next";
+import Link from "next/link";
+import { recipes } from "@/data/recipes";
+import RecipeCard from "@/components/recipes/RecipeCard";
 
-type Recipe = { slug: string; title: string; time: string; tags: string[]; summary: string; };
-
-const RECIPES: Recipe[] = [
-  { slug: "butter-chicken-naanwich", title: "Butter Chicken Naan‑wich", time: "10 min", tags: ["Chicken", "Quick"], summary: "Juicy shredded chicken tossed in our Butter Masala, folded in warm naan with pickled onions." },
-  { slug: "masala-chickpea-bowl", title: "Masala Chickpea Bowl", time: "12 min", tags: ["Vegan", "High‑Fiber"], summary: "Pressure‑cooked chickpeas with Tikka Masala over brown rice, spinach, and crunchy cukes." },
-  { slug: "korma-salmon", title: "Korma Salmon", time: "15 min", tags: ["Pescatarian", "Omega‑3"], summary: "Pan‑seared salmon finished in creamy Korma with lemon and herbs; serve with quinoa." },
-  { slug: "paneer-veggie-skillet", title: "Paneer Veggie Skillet", time: "14 min", tags: ["Vegetarian", "30‑plants"], summary: "Crispy paneer, zucchini, peppers in Makhani; finish with yogurt and herbs." },
-  { slug: "tikka-tofu-wraps", title: "Tikka Tofu Wraps", time: "12 min", tags: ["Vegan", "High‑Protein"], summary: "Crispy tofu tossed in Tikka, wrapped with greens, avocado, and slaw." },
-  { slug: "saag-eggs", title: "Saag Eggs", time: "8 min", tags: ["Vegetarian", "Brunch"], summary: "Soft‑scrambled eggs with garlicky spinach; spoon over toast with chili oil." },
-];
+export const metadata: Metadata = {
+  title: "Recipes — Tru Flavors",
+  description:
+    "Quick, practical recipes inspired by our curry kits and bases. Filter by time, heat, and diet.",
+  alternates: { canonical: "/recipes" },
+  openGraph: {
+    title: "Recipes — Tru Flavors",
+    description:
+      "Quick, practical recipes inspired by Tru Flavors kits and bases.",
+    url: "https://truflavors.org/recipes",
+    images: [{ url: "/images/og.png" }],
+  },
+};
 
 export default function RecipesPage() {
+  // Prepare filter options from data
+  const dietTags = ["vegetarian", "gluten-free", "dairy-free"];
+  const heatLevels = ["mild", "medium", "hot"];
+  const timeBrackets = ["≤ 5 min", "10–20 min", "20–30 min"];
+
   return (
-    <main className="mx-auto max-w-6xl px-6 md:px-8 py-12">
-      <header className="mb-8">
-        <h1 className="text-4xl font-semibold text-slate-900">Recipes & Pairings</h1>
-        <p className="mt-2 text-lg text-slate-700 max-w-3xl">
-          5–15 minute ideas using Tru Flavors kits. Mix‑and‑match proteins and plants to hit your flavor and nutrition goals.
-        </p>
+    <section className="container-max py-10">
+      {/* Breadcrumbs */}
+      <nav className="text-sm text-gray-500 mb-6">
+        <Link className="link" href="/">Home</Link>
+        <span className="mx-2">/</span>
+        <span className="text-gray-700">Recipes</span>
+      </nav>
+
+      {/* HERO / HEADER */}
+      <header className="rounded-3xl border bg-white p-8 md:p-12">
+        <div className="grid gap-8 md:grid-cols-2 md:items-center">
+          <div>
+            <h1 className="text-3xl md:text-4xl font-bold tracking-tight">
+              Weeknight-simple recipes.{" "}
+              <span className="text-brand">Chef-level flavor.</span>
+            </h1>
+            <p className="mt-4 text-gray-600 leading-relaxed">
+              Browse quick ideas inspired by our curry kits and bases. Choose your heat,
+              time, and dietary tags — dinner’s on the table fast.
+            </p>
+            <div className="mt-6 flex flex-wrap gap-3">
+              <span className="badge">≤ 5 min (RTE)</span>
+              <span className="badge">10–20 min (RTC)</span>
+              <span className="badge">Vegetarian / DF / GF</span>
+            </div>
+          </div>
+
+          <div className="rounded-3xl overflow-hidden border bg-brand-light/40">
+            <img
+              src="/images/recipes/hero.jpg"
+              alt="Assorted plated curries"
+              className="w-full h-auto"
+            />
+          </div>
+        </div>
       </header>
 
-      <section className="grid gap-6 md:grid-cols-2">
-        {RECIPES.map((r) => (
-          <article key={r.slug} className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-            <div className="flex items-center justify-between">
-              <h2 className="text-xl font-semibold text-slate-900">{r.title}</h2>
-              <span className="rounded-full bg-orange-50 px-3 py-1 text-xs font-semibold text-orange-700 ring-1 ring-orange-200">{r.time}</span>
-            </div>
-            <p className="mt-2 text-sm text-slate-700">{r.summary}</p>
+      {/* FILTERS */}
+      <div className="mt-8 rounded-2xl border bg-white p-5">
+        <form className="grid gap-4 sm:grid-cols-3">
+          {/* Time */}
+          <fieldset>
+            <legend className="text-sm font-medium text-gray-700">Time</legend>
             <div className="mt-3 flex flex-wrap gap-2">
-              {r.tags.map((t) => (
-                <span key={t} className="rounded-full bg-white px-3 py-1 text-xs text-slate-700 ring-1 ring-slate-200">{t}</span>
+              {timeBrackets.map((t) => (
+                <label key={t} className="badge cursor-pointer">
+                  <input type="checkbox" name="time" value={t} className="sr-only peer" />
+                  <span className="peer-checked:underline">{t}</span>
+                </label>
               ))}
             </div>
-          </article>
-        ))}
+          </fieldset>
+
+          {/* Heat */}
+          <fieldset>
+            <legend className="text-sm font-medium text-gray-700">Heat</legend>
+            <div className="mt-3 flex flex-wrap gap-2">
+              {heatLevels.map((h) => (
+                <label key={h} className="badge cursor-pointer">
+                  <input type="checkbox" name="heat" value={h} className="sr-only peer" />
+                  <span className="peer-checked:underline capitalize">{h}</span>
+                </label>
+              ))}
+            </div>
+          </fieldset>
+
+          {/* Diet */}
+          <fieldset>
+            <legend className="text-sm font-medium text-gray-700">Diet</legend>
+            <div className="mt-3 flex flex-wrap gap-2">
+              {dietTags.map((d) => (
+                <label key={d} className="badge cursor-pointer">
+                  <input type="checkbox" name="diet" value={d} className="sr-only peer" />
+                  <span className="peer-checked:underline capitalize">{d}</span>
+                </label>
+              ))}
+            </div>
+          </fieldset>
+        </form>
+        <p className="mt-3 text-xs text-gray-500">
+          Tip: combine filters — e.g. “10–20 min” + “vegetarian” + “mild”.
+        </p>
+      </div>
+
+      {/* GRID */}
+      <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {recipes.map((r) => <RecipeCard key={r.id} r={r} />)}
+      </div>
+
+      {/* CTA */}
+      <section className="mt-12">
+        <div className="rounded-3xl border bg-gradient-to-br from-brand/10 to-brand-light/40 p-6 md:p-8">
+          <div className="grid gap-6 md:grid-cols-2 md:items-center">
+            <div>
+              <h2 className="text-xl font-semibold">Shop the bases behind the recipes</h2>
+              <p className="mt-2 text-gray-700">
+                Choose a ready-to-eat curry for ≤ 5 minutes, or a base for 10–20 minute cooking.
+              </p>
+              <div className="mt-6 flex flex-wrap gap-3">
+                <Link href="/products/ready-to-eat" className="btn btn-primary">Ready to Eat</Link>
+                <Link href="/products/ready-to-cook" className="btn btn-ghost">Ready to Cook</Link>
+              </div>
+            </div>
+            <div className="rounded-2xl overflow-hidden border bg-white">
+              <img
+                src="/images/recipes/cta.jpg"
+                alt="Tru Flavors kits and plated dishes"
+                className="w-full h-auto"
+              />
+            </div>
+          </div>
+        </div>
       </section>
-    </main>
+
+      {/* JSON-LD (Recipe collection) */}
+      <script
+        type="application/ld+json"
+        suppressHydrationWarning
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ItemList",
+            itemListElement: recipes.slice(0, 12).map((r, i) => ({
+              "@type": "ListItem",
+              position: i + 1,
+              url: `https://truflavors.org/recipes#${r.id}`,
+              name: r.title,
+            })),
+          }),
+        }}
+      />
+    </section>
   );
 }
+
+/**
+ * Expected Tailwind utilities (as used elsewhere):
+ * .container-max { @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8; }
+ * .btn { @apply inline-flex items-center justify-center rounded-full px-4 py-2 text-sm font-medium border; }
+ * .btn-primary { @apply border-brand bg-brand text-white hover:opacity-90; }
+ * .btn-ghost { @apply border-gray-300 text-gray-800 hover:bg-gray-100; }
+ * .badge { @apply inline-flex items-center rounded-full border px-2.5 py-1 text-xs font-medium bg-white; }
+ * .text-brand { @apply text-amber-600; }
+ * .bg-brand-light { @apply bg-amber-100; }
+ */
