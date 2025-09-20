@@ -18,7 +18,7 @@ export default function Footer() {
           <ul className="mt-3 space-y-2 text-sm text-slate-700">
             <li><a href="/science" className="hover:underline underline-offset-4 decoration-2 hover:text-brand transition-colors">Our Science</a></li>
             <li><a href="/gut-health" className="hover:underline underline-offset-4 decoration-2 hover:text-brand transition-colors">Gut Health 101</a></li>
-            <li><a href="/standards-ingredients" className="hover:underline underline-offset-4 decoration-2 hover:text-brand transition-colors">Ingredients We Choose</a></li>
+            <li><a href="/ingredients" className="hover:underline underline-offset-4 decoration-2 hover:text-brand transition-colors">Ingredients We Choose</a></li>
             <li><a href="/protocols" className="hover:underline underline-offset-4 decoration-2 hover:text-brand transition-colors">Dietary Protocols</a></li>
             <li><a href="/recipes" className="hover:underline underline-offset-4 decoration-2 hover:text-brand transition-colors">Recipes & Pairings</a></li>
           </ul>
