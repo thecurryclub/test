@@ -1,12 +1,11 @@
-
 "use client";
 import React, {useEffect, useRef, useState} from "react";
 import Link from "next/link";
 
-type MenuLink = { label: string; href: string };
+type MenuLink = { label: string; href: { pathname: string; query?: { [key: string]: string; }; }; };
 type MenuSection = { heading: string; links: MenuLink[]; };
 type NavItem =
-  | { type: "link"; label: string; href: string }
+  | { type: "link"; label: string; href: { pathname: string; query?: { [key: string]: string; }; }; }
   | { type: "dropdown"; label: string; sections: MenuSection[] };
 
 const NAV: NavItem[] = [
@@ -17,28 +16,28 @@ const NAV: NavItem[] = [
       {
         heading: "By Collection",
         links: [
-          { label: "Indian Classics", href: "/products?collection=indian-classics" },
-          { label: "Global Favorites", href: "/products?collection=global-favorites" },
-          { label: "New Arrivals", href: "/products?collection=new-arrivals" },
-          { label: "Bundles & Kits", href: "/products?collection=bundles-kits" }
+          { label: "Indian Classics", href: { pathname: "/products", query: { collection: "indian-classics" } } },
+          { label: "Global Favorites", href: { pathname: "/products", query: { collection: "global-favorites" } } },
+          { label: "New Arrivals", href: { pathname: "/products", query: { collection: "new-arrivals" } } },
+          { label: "Bundles & Kits", href: { pathname: "/products", query: { collection: "bundles-kits" } } }
         ]
       },
       {
         heading: "Dietary Protocols",
         links: [
-          { label: "Gundry Protocol", href: "/products?protocol=gundry-protocol" },
-          { label: "Gluten‑Free", href: "/products?protocol=gluten-free" },
-          { label: "Dairy‑Free", href: "/products?protocol=dairy-free" },
-          { label: "Low FODMAP", href: "/products?protocol=fodmap-friendly?" }
+          { label: "Gundry Protocol", href: { pathname: "/products", query: { protocol: "gundry-protocol" } } },
+          { label: "Gluten‑Free", href: { pathname: "/products", query: { protocol: "gluten-free" } } },
+          { label: "Dairy‑Free", href: { pathname: "/products", query: { protocol: "dairy-free" } } },
+          { label: "Low FODMAP", href: { pathname: "/products", query: { protocol: "fodmap-friendly" } } }
         ]
       },
       {
         heading: "Meal Type",
         links: [
-          { label: "Ready‑to‑Heat", href: "/products?meal=ready-to-heat" },
-          { label: "Sauces", href: "/products?meal=sauce" },
-          { label: "Bases", href: "/products?meal=base" },
-          { label: "Snacks", href: "/products?meal=snack" }
+          { label: "Ready‑to‑Heat", href: { pathname: "/products", query: { meal: "ready-to-heat" } } },
+          { label: "Sauces", href: { pathname: "/products", query: { meal: "sauce" } } },
+          { label: "Bases", href: { pathname: "/products", query: { meal: "base" } } },
+          { label: "Snacks", href: { pathname: "/products", query: { meal: "snack" } } }
         ]
       }
     ]
@@ -50,31 +49,31 @@ const NAV: NavItem[] = [
       {
         heading: "Science",
         links: [
-          { label: "Our Science", href: "/standards" },
-          { label: "Gut Health 101", href: "/gut-health" },
-          { label: "Ingredients We Choose", href: "/standards" }
+          { label: "Our Science", href: { pathname: "/standards" } },
+          { label: "Gut Health 101", href: { pathname: "/gut-health" } },
+          { label: "Ingredients We Choose", href: { pathname: "/standards" } }
         ]
       },
       {
         heading: "How It Works",
         links: [
-          { label: "3‑Step Cooking", href: "/how-it-works" },
-          { label: "Recipes & Pairings", href: "/recipes" },
-          { label: "Storage & Shelf Life", href: "/how-it-works#storage" }
+          { label: "3‑Step Cooking", href: { pathname: "/how-it-works" } },
+          { label: "Recipes & Pairings", href: { pathname: "/recipes" } },
+          { label: "Storage & Shelf Life", href: { pathname: "/how-it-works", query: { hash: "storage" } } }
         ]
       },
       {
         heading: "Community",
         links: [
-          { label: "Reviews", href: "/reviews" },
-          { label: "Culture Boxes", href: "/subscribe" },
-          { label: "Blog", href: "/blog" }
+          { label: "Reviews", href: { pathname: "/reviews" } },
+          { label: "Culture Boxes", href: { pathname: "/subscribe" } },
+          { label: "Blog", href: { pathname: "/blog" } }
         ]
       }
     ]
   },
-  { type: "link", label: "About", href: "/about" },
-  { type: "link", label: "Contact", href: "/contact" }
+  { type: "link", label: "About", href: { pathname: "/about" } },
+  { type: "link", label: "Contact", href: { pathname: "/contact" } }
 ];
 
 function classNames(...xs: Array<string | false | null | undefined>) {
@@ -193,9 +192,9 @@ export default function Navbar() {
             </nav>
 
             <div className="hidden md:flex items-center gap-2">
-              <Link href="/search" className="px-3 py-2 text-sm text-gray-600 hover:text-orange-700">Search</Link>
-              <Link href="/account" className="px-3 py-2 text-sm text-gray-600 hover:text-orange-700">Account</Link>
-              <Link href="/cart" className="px-3 py-2 text-sm text-gray-600 hover:text-orange-700">Cart</Link>
+              <Link href={{ pathname: "/search" }} className="px-3 py-2 text-sm text-gray-600 hover:text-orange-700">Search</Link>
+              <Link href={{ pathname: "/account" }} className="px-3 py-2 text-sm text-gray-600 hover:text-orange-700">Account</Link>
+              <Link href={{ pathname: "/cart" }} className="px-3 py-2 text-sm text-gray-600 hover:text-orange-700">Cart</Link>
             </div>
 
             <button className="md:hidden inline-flex items-center justify-center rounded-xl p-2 text-gray-700 hover:bg-gray-100" aria-label="Open menu" onClick={() => setMobileOpen(true)}>
@@ -243,7 +242,7 @@ export default function Navbar() {
                 )}
               </div>
             ))}
-            <Link href="/subscribe" className="mt-4 inline-flex w-full items-center justify-center rounded-xl bg-orange-600 px-3 py-3 text-white font-medium hover:bg-orange-700" onClick={() => setMobileOpen(false)}>
+            <Link href={{ pathname: "/subscribe" }} className="mt-4 inline-flex w-full items-center justify-center rounded-xl bg-orange-600 px-3 py-3 text-white font-medium hover:bg-orange-700" onClick={() => setMobileOpen(false)}>
               Subscribe & Save
             </Link>
           </div>
