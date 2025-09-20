@@ -1,0 +1,91 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body { height: 100%; }
+body { color:#0F172A; background:#fff; }
+
+.container-max { @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8; }
+.badge { @apply inline-flex items-center rounded-full px-3 py-1 text-sm font-medium bg-brand/10 text-brand; }
+.card { @apply rounded-2xl shadow-soft bg-white border border-gray-100; }
+.btn { @apply inline-flex items-center justify-center rounded-xl px-4 py-2 font-semibold transition; }
+.btn-primary { @apply inline-flex items-center justify-center rounded-xl px-4 py-2 font-semibold bg-brand text-white hover:opacity-90 shadow-soft focus-ring; }
+.btn-secondary { @apply btn bg-ink text-white hover:bg-ink/90; }
+.kicker { @apply tracking-wider uppercase text-xs font-semibold text-brand; }
+.lead { @apply text-lg text-gray-700; }
+
+.focus-ring { @apply outline-none ring-2 ring-brand/30 ring-offset-2 ring-offset-white; }
+
+.section { @apply container-max py-16; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  100% { transform: translateX(-100%); }
+
+
+  100% { transform: translateX(0); }
+
+/* === TF Marquee (CLEAN, balanced) === */
+.tf-marquee { 
+  border-top: 1px solid rgba(0,0,0,0.06);
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  background: rgba(255,255,255,0.4);
+  -webkit-backdrop-filter: saturate(180%) blur(8px);
+  backdrop-filter: saturate(180%) blur(8px);
+}
+.tf-marquee__viewport { 
+  position: relative; 
+  overflow: hidden; 
+  height: 44px; 
+}
+.tf-marquee__track { align-items: center; 
+  position: absolute; 
+  left: 0; top: 0; 
+  display: inline-flex; 
+  gap: 2rem; 
+  white-space: nowrap; 
+  will-change: transform;
+  padding: 0 1rem;
+}
+.tf-marquee__track--a { animation: tf-marquee-a 26s linear infinite; }
+.tf-marquee__track--b { animation: tf-marquee-b 26s linear infinite; }
+@keyframes tf-marquee-a {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-100%); }
+}
+@keyframes tf-marquee-b {
+  0%   { transform: translateX(100%); }
+  100% { transform: translateX(0); }
+}
+.tf-marquee__item { 
+  font-size: 0.95rem; 
+  color: rgb(75 85 99); /* gray-600 */
+  padding: 0 0.25rem; 
+  display:inline-flex; align-items:center; height:44px;
+}
+/* === end TF Marquee === */
+
+
+html{scroll-behavior:smooth}
