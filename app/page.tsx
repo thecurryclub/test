@@ -1,19 +1,39 @@
 // app/page.tsx
 import type { Metadata } from "next";
 import Link from "next/link";
-import Image from "next/image";
 
-import BadgesMarquee from "@/components/home/BadgesMarquee";
+import HeroV2 from "@/components/home/HeroV2";
+import TrustRow from "@/components/home/TrustRow";
+import WhyItWorks from "@/components/home/WhyItWorks";
+import HowItWorks from "@/components/home/HowItWorks";
+
+// Investor-friendly KPI strip (inline, defined below)
+import KPIRow from "./kpi-row";
+
+// Demand & catalog
 import BestSellers from "@/components/home/BestSellers";
-import PressStrip from "@/components/home/PressStrip";
+import RegionalTiles from "@/components/home/Update RegionalTiles"; // ← if your filename has a space, rename the file to UpdateRegionalTiles.tsx and update this import
+// If the import above errors due to filename spacing, use the older one:
+// import RegionalTiles from "@/components/home/RegionalTiles";
+
+import CultureTeaser from "@/components/home/CultureTeaser";
+
+// Credibility & proof
+import ImpactRow from "@/components/home/ImpactRow";
 import EvidenceRow from "@/components/home/EvidenceRow";
+import PressStrip from "@/components/home/PressStrip";
+import MiniTestimonials from "@/components/home/MiniTestimonials";
+
+// Risk reducers / benefits
+import GoalStrip from "@/components/home/Update GoalStrip"; // Same filename note as above; otherwise use GoalStrip
+// import GoalStrip from "@/components/home/GoalStrip";
 import Guarantee from "@/components/home/Guarantee";
+
+// Lightweight badges + sticky CTA
+import BadgesMarquee from "@/components/home/BadgesMarquee";
 import StickyCTA from "@/components/home/StickyCTA";
 
-// Optional: if you have products data available for featured grid
-import { products } from "@/data/products"; // adjust path if different
-
-export const revalidate = 3600; // Revalidate homepage hourly (ISR)
+export const revalidate = 3600;
 
 export const metadata: Metadata = {
   title: "Tru Flavors — Chef-level curries in ≤ 5 minutes",
@@ -29,222 +49,108 @@ export const metadata: Metadata = {
   },
 };
 
-function currency(amount?: number) {
-  if (typeof amount !== "number") return "";
-  return `£${amount.toFixed(2)}`;
-}
-
-export default function Home() {
-  const featured = (products || []).slice(0, 6); // pick any logic you like (e.g., filter by tag 'featured')
-
+export default function Page() {
   return (
-    <main>
-      {/* HERO */}
-      <section className="relative mt-4 overflow-hidden">
-        {/* Full-bleed */}
-        <div className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen">
-          <div className="relative min-h-[60vh] md:min-h-[72vh]">
-            {/* Background image (decorative) */}
-            <div className="absolute inset-0">
-              <Image
-                src="/hero.jpg" // keep your existing public asset if you prefer
-                alt=""
-                fill
-                priority
-                sizes="100vw"
-                className="object-cover"
-              />
-            </div>
+    <main className="relative">
+      {/* 1) Refined hero */}
+      <HeroV2 />
 
-            {/* Content */}
-            <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 md:py-16">
-              <div className="mx-auto max-w-3xl rounded-[28px] bg-white/85 p-6 shadow-xl ring-1 ring-brand/30 backdrop-blur md:p-10">
-                <div className="mb-3">
-                  <span className="badge">Chef-crafted • Clean label</span>
-                </div>
-
-                <h1 className="text-4xl md:text-5xl font-bold leading-tight tracking-tight">
-                  Chef-crafted curry kits that{" "}
-                  <span className="text-brand">love your gut.</span>
-                </h1>
-
-                <p className="mt-4 text-base md:text-lg text-gray-700 leading-relaxed">
-                  Big flavor, minimal effort — most meals ready in ≤ 5 minutes.
-                  No artificial colors or flavors.
-                </p>
-
-                <div className="mt-6 flex flex-wrap gap-3">
-                  <Link href="/products" className="btn btn-primary">
-                    Shop Products
-                  </Link>
-                  <Link href="/subscribe" className="btn btn-ghost">
-                    Subscribe — Culture Box
-                  </Link>
-                </div>
-
-                <p className="mt-3 text-xs text-gray-500">
-                  No seed oils • Gluten-free options • Dairy-free options • FODMAP-friendly*
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
+      {/* 2) Trust & how it works */}
+      <section className="container-max mt-8">
+        <TrustRow />
       </section>
 
-      {/* COLLECTIONS CHIPS */}
-      <section className="container-max mt-6">
-        <div className="rounded-2xl border bg-white p-4">
-          <div className="flex flex-wrap gap-2">
-            <Link href="/products/ready-to-eat" className="badge hover:bg-gray-50">
-              Ready-to-Eat
-            </Link>
-            <Link href="/products/ready-to-cook" className="badge hover:bg-gray-50">
-              Ready-to-Cook
-            </Link>
-            <Link href="/products/vegetarian" className="badge hover:bg-gray-50">
-              Vegetarian
-            </Link>
-            <Link href="/products/gluten-free" className="badge hover:bg-gray-50">
-              Gluten-free
-            </Link>
-            <Link href="/products/dairy-free" className="badge hover:bg-gray-50">
-              Dairy-free
-            </Link>
-            <Link href="/products/fodmap-friendly" className="badge hover:bg-gray-50">
-              FODMAP-friendly
-            </Link>
-            <Link href="/products/spicy" className="badge hover:bg-gray-50">
-              Spicy
-            </Link>
-            <Link href="/products/weight-friendly" className="badge hover:bg-gray-50">
-              Weight-friendly
-            </Link>
-            {/* typedRoutes note:
-               If you add a query link, use UrlObject form, e.g.:
-               <Link href={{ pathname: "/products", query: { collection: "new-arrivals" } }} className="badge hover:bg-gray-50">New Arrivals</Link>
-            */}
-          </div>
-        </div>
+      <section className="container-max mt-8">
+        <WhyItWorks />
       </section>
 
-      {/* TRUST MARQUEE / EXISTING STRIPS */}
-      <BadgesMarquee />
-
-      {/* FEATURED / NEW & NOTEWORTHY */}
-      <section className="container-max py-12">
-        <div className="flex items-end justify-between">
-          <h2 className="text-2xl font-bold">New &amp; Noteworthy</h2>
-          <Link href="/products" className="link">
-            View all →
-          </Link>
-        </div>
-
-        <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {featured.map((p: any) => {
-            const img = p?.image || "/images/placeholder.svg";
-            // typedRoutes-safe dynamic route for /products/[id]
-            const productHref = { pathname: "/products/[id]", query: { id: String(p?.id) } };
-
-            return (
-              <article
-                key={p?.id}
-                className="rounded-2xl border overflow-hidden bg-white hover:shadow-soft transition-shadow"
-              >
-                <Link href={productHref}>
-                  <div className="aspect-[4/5] bg-brand-light flex items-center justify-center">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      src={img}
-                      alt={p?.name || "Product"}
-                      className="w-full h-full object-cover"
-                      loading="lazy"
-                    />
-                  </div>
-                </Link>
-                <div className="p-4">
-                  <h3 className="font-semibold leading-tight">
-                    <Link href={productHref} className="hover:underline">
-                      {p?.name || "Product"}
-                    </Link>
-                  </h3>
-                  <p className="text-sm text-gray-500 mt-1">
-                    {currency(p?.price)}
-                  </p>
-                  <div className="mt-2 flex flex-wrap gap-1 text-[11px]">
-                    {p?.vegetarian && <span className="badge">Vegetarian</span>}
-                    {p?.readyToEat && <span className="badge">≤ 5 min</span>}
-                    {p?.tags?.includes("mild") && <span className="badge">Mild</span>}
-                    {p?.tags?.includes("gluten-free") && (
-                      <span className="badge">Gluten-free</span>
-                    )}
-                    {p?.tags?.includes("dairy-free") && (
-                      <span className="badge">Dairy-free</span>
-                    )}
-                  </div>
-                </div>
-              </article>
-            );
-          })}
-          {featured.length === 0 && (
-            <div className="text-sm text-gray-500">
-              No products yet — add some to <code>data/products.ts</code>.
-            </div>
-          )}
-        </div>
+      <section className="container-max mt-8">
+        <HowItWorks />
       </section>
 
-      {/* EXISTING HOME SECTIONS (unchanged) */}
-      <BestSellers />
-      <PressStrip />
-      <EvidenceRow />
-      <Guarantee />
+      {/* 3) Investor-friendly KPI row (inline) */}
+      <section className="container-max mt-10">
+        <KPIRow />
+      </section>
 
-      {/* Sticky CTA */}
+      {/* 4) Show demand and breadth */}
+      <section className="container-max mt-12">
+        <BestSellers />
+      </section>
+
+      <section className="container-max mt-12">
+        <RegionalTiles />
+      </section>
+
+      <section className="container-max mt-12">
+        <CultureTeaser />
+      </section>
+
+      {/* 5) Impact, evidence, and external validation */}
+      <section className="container-max mt-12">
+        <ImpactRow />
+      </section>
+
+      <section className="container-max mt-12">
+        <EvidenceRow />
+      </section>
+
+      <section className="container-max mt-12">
+        <PressStrip />
+      </section>
+
+      <section className="container-max mt-12">
+        <MiniTestimonials />
+      </section>
+
+      {/* 6) Benefits & risk reducers */}
+      <section className="container-max mt-12">
+        <GoalStrip />
+      </section>
+
+      <section className="container-max mt-12">
+        <Guarantee />
+      </section>
+
+      {/* 7) Lightweight credibility & sticky conversion */}
+      <section className="container-max mt-8">
+        <BadgesMarquee />
+      </section>
+
       <StickyCTA />
-
-      {/* JSON-LD (optional; keep if you don’t already add in layout) */}
-      <script
-        type="application/ld+json"
-        suppressHydrationWarning
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Organization",
-            name: "Tru Flavors",
-            url: "https://truflavors.org",
-            logo: "https://truflavors.org/images/logo.png",
-            sameAs: [],
-          }),
-        }}
-      />
-      <script
-        type="application/ld+json"
-        suppressHydrationWarning
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "WebSite",
-            url: "https://truflavors.org",
-            potentialAction: {
-              "@type": "SearchAction",
-              target: "https://truflavors.org/search?q={query}",
-              "query-input": "required name=query",
-            },
-          }),
-        }}
-      />
     </main>
   );
 }
 
 /**
- * This page relies on your shared utilities:
- * .container-max { @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8; }
- * .btn { @apply inline-flex items-center justify-center rounded-full px-4 py-2 text-sm font-medium border; }
- * .btn-primary { @apply border-brand bg-brand text-white hover:opacity-90; }
- * .btn-ghost { @apply border-gray-300 text-gray-800 hover:bg-gray-100; }
- * .badge { @apply inline-flex items-center rounded-full border px-2.5 py-1 text-xs font-medium bg-white; }
- * .text-brand { @apply text-amber-600; }
- * .bg-brand-light { @apply bg-amber-100; }
- * .hover:shadow-soft { box-shadow: 0 8px 24px rgba(0,0,0,0.06); }
+ * Inline KPI component (investor-friendly snapshot).
+ * Replace placeholder numbers with real metrics as you get them.
+ * If you wish, move this into components/home/KPIRow.tsx later.
  */
+function KPIRow() {
+  const KPIS = [
+    { label: "Orders fulfilled", value: "12,540+", sub: "last 12 months" },
+    { label: "Repeat purchase rate", value: "38%", sub: "cohort avg." },
+    { label: "Avg. prep time", value: "≤ 5 min", sub: "RTE; RTC 10–20" },
+    { label: "Retail partners", value: "120+", sub: "UK & EU" },
+  ];
+  return (
+    <div className="rounded-3xl border bg-white p-6 md:p-8">
+      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {KPIS.map((k) => (
+          <article key={k.label} className="rounded-2xl border p-5 bg-white">
+            <div className="text-2xl md:text-3xl font-bold tracking-tight">{k.value}</div>
+            <div className="mt-1 text-sm text-gray-600">{k.label}</div>
+            {k.sub && <div className="mt-1 text-xs text-gray-500">{k.sub}</div>}
+          </article>
+        ))}
+      </div>
+
+      {/* Optional tiny policy/claims strip */}
+      <div className="mt-4 text-xs text-gray-500">
+        “FODMAP-friendly” is general guidance — individual tolerance varies. See{" "}
+        <Link href="/standards-ingredients" className="link">Standards &amp; Ingredients</Link>.
+      </div>
+    </div>
+  );
+}
