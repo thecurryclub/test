@@ -14,7 +14,7 @@ export default function CultureTeaser() {
         </div>
         <div className="relative rounded-2xl overflow-hidden bg-brand-light h-64 md:h-80">
   <Image
-    src="/og/culture-box.png"
+    src="public/og/og.jpg"
     alt="Tru Flavors Culture Box – monthly curated curry kits"
     fill
     sizes="(min-width: 768px) 50vw, 100vw"
