@@ -23,9 +23,10 @@ const SORTS = [
   { key: "name", label: "Name A → Z" },
 ] as const;
 
-function toUrl(base: string, params: URLSearchParams) {
+// Return a plain string (no const assertion) to satisfy TS
+function toUrl(base: string, params: URLSearchParams): string {
   const q = params.toString();
-  return q ? (`${base}?${q}` as const) : (base as const);
+  return q ? `${base}?${q}` : base;
 }
 
 export default function FilterBar() {
@@ -33,18 +34,16 @@ export default function FilterBar() {
   const pathname = usePathname() || "/products";
   const params = useSearchParams();
 
-  // read current
+  // current state
   const q = params.get("q") ?? "";
   const category = params.get("category") ?? "";
   const tag = params.get("tag") ?? "";
   const sort = params.get("sort") ?? "pop";
 
-  // helpers
   function setParam(key: string, value?: string) {
     const next = new URLSearchParams(params.toString());
     if (value && value.trim() !== "") next.set(key, value);
     else next.delete(key);
-    // clean any pagination param if you add later
     next.delete("page");
     router.push(toUrl(pathname, next));
   }
@@ -57,12 +56,21 @@ export default function FilterBar() {
     <div className="sticky top-[64px] z-30 border-b bg-white/90 backdrop-blur">
       <div className="container-max px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col gap-3 py-3 md:flex-row md:items-center md:justify-between">
-          {/* Categories: slim, scrollable on mobile */}
+          {/* Categories */}
           <nav className="-mx-1 overflow-x-auto order-2 md:order-1">
             <div className="flex gap-2 px-1 pb-1">
               <Link
-                href={toUrl("/products", new URLSearchParams([["q", q], ["tag", tag], ["sort", sort !== "pop" ? sort : ""]]))}
-                className={`badge whitespace-nowrap ${!category ? "ring-1" : "bg-white hover:bg-gray-50"}`}
+                href={toUrl(
+                  "/products",
+                  new URLSearchParams([
+                    ["q", q],
+                    ["tag", tag],
+                    ["sort", sort !== "pop" ? sort : ""],
+                  ])
+                )}
+                className={`badge whitespace-nowrap ${
+                  !category ? "ring-1" : "bg-white hover:bg-gray-50"
+                }`}
               >
                 All
               </Link>
@@ -73,7 +81,11 @@ export default function FilterBar() {
                   <Link
                     key={c.key}
                     href={toUrl("/products", p)}
-                    className={`badge whitespace-nowrap ${category === c.key ? "ring-1" : "bg-white hover:bg-gray-50"}`}
+                    className={`badge whitespace-nowrap ${
+                      category === c.key
+                        ? "ring-1"
+                        : "bg-white hover:bg-gray-50"
+                    }`}
                     title={c.label}
                   >
                     {c.label}
@@ -105,7 +117,7 @@ export default function FilterBar() {
               </span>
             </form>
 
-            {/* Tag dropdown */}
+            {/* Tag */}
             <div className="relative">
               <select
                 className="appearance-none rounded-full border px-3 py-2 text-sm pr-7 focus:ring-2 focus:ring-orange-200"
@@ -120,10 +132,12 @@ export default function FilterBar() {
                   </option>
                 ))}
               </select>
-              <div className="pointer-events-none absolute inset-y-0 right-2 flex items-center text-gray-400">▾</div>
+              <div className="pointer-events-none absolute inset-y-0 right-2 flex items-center text-gray-400">
+                ▾
+              </div>
             </div>
 
-            {/* Sort dropdown */}
+            {/* Sort */}
             <div className="relative">
               <select
                 className="appearance-none rounded-full border px-3 py-2 text-sm pr-7 focus:ring-2 focus:ring-orange-200"
@@ -137,7 +151,9 @@ export default function FilterBar() {
                   </option>
                 ))}
               </select>
-              <div className="pointer-events-none absolute inset-y-0 right-2 flex items-center text-gray-400">▾</div>
+              <div className="pointer-events-none absolute inset-y-0 right-2 flex items-center text-gray-400">
+                ▾
+              </div>
             </div>
 
             {/* Clear */}
