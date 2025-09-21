@@ -1,20 +1,14 @@
 // app/page.tsx
 import type { Metadata } from "next";
-import Link from "next/link";
 
 import HeroV2 from "@/components/home/HeroV2";
 import TrustRow from "@/components/home/TrustRow";
 import WhyItWorks from "@/components/home/WhyItWorks";
 import HowItWorks from "@/components/home/HowItWorks";
 
-// Investor-friendly KPI strip (inline, defined below)
-import KPIRow from "./kpi-row";
-
 // Demand & catalog
 import BestSellers from "@/components/home/BestSellers";
-import RegionalTiles from "@/components/home/RegionalTiles"; // ← if your filename has a space, rename the file to UpdateRegionalTiles.tsx and update this import
-// If the import above errors due to filename spacing, use the older one:
-// import RegionalTiles from "@/components/home/RegionalTiles";
+import RegionalTiles from "@/components/home/RegionalTiles"; // use this; or switch to UpdateRegionalTiles if you renamed the file
 
 import CultureTeaser from "@/components/home/CultureTeaser";
 
@@ -25,8 +19,7 @@ import PressStrip from "@/components/home/PressStrip";
 import MiniTestimonials from "@/components/home/MiniTestimonials";
 
 // Risk reducers / benefits
-import GoalStrip from "@/components/home/GoalStrip"; // Same filename note as above; otherwise use GoalStrip
-// import GoalStrip from "@/components/home/GoalStrip";
+import GoalStrip from "@/components/home/GoalStrip"; // use this; or switch to UpdateGoalStrip if you renamed the file
 import Guarantee from "@/components/home/Guarantee";
 
 // Lightweight badges + sticky CTA
@@ -70,7 +63,7 @@ export default function Page() {
 
       {/* 3) Investor-friendly KPI row (inline) */}
       <section className="container-max mt-10">
-        <KPIRow />
+        <KPIStrip />
       </section>
 
       {/* 4) Show demand and breadth */}
@@ -125,9 +118,9 @@ export default function Page() {
 /**
  * Inline KPI component (investor-friendly snapshot).
  * Replace placeholder numbers with real metrics as you get them.
- * If you wish, move this into components/home/KPIRow.tsx later.
+ * If you wish, move this into components/home/KPIStrip.tsx later.
  */
-function KPIRow() {
+function KPIStrip() {
   const KPIS = [
     { label: "Orders fulfilled", value: "12,540+", sub: "last 12 months" },
     { label: "Repeat purchase rate", value: "38%", sub: "cohort avg." },
@@ -149,7 +142,7 @@ function KPIRow() {
       {/* Optional tiny policy/claims strip */}
       <div className="mt-4 text-xs text-gray-500">
         “FODMAP-friendly” is general guidance — individual tolerance varies. See{" "}
-        <Link href="/standards-ingredients" className="link">Standards &amp; Ingredients</Link>.
+        <a href="/standards-ingredients" className="link">Standards &amp; Ingredients</a>.
       </div>
     </div>
   );
