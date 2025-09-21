@@ -1,6 +1,28 @@
 import Section from "@/components/ui/Section";
 import Button from "@/components/ui/Button";
 import Link from "next/link";
+import Image from "next/image";
+
+
+export const metadata = {
+  title: "The Culture Box",
+  openGraph: {
+    title: "The Culture Box",
+    images: [
+      {
+        url: "/og/og.jpg", // place this file in /public/og/
+        width: 1200,
+        height: 630,
+        alt: "Tru Flavors – The Culture Box",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    images: ["/og/og.jpg"],
+  },
+};
+
 
 export default function CultureTeaser() {
   return (
@@ -14,7 +36,7 @@ export default function CultureTeaser() {
         </div>
         <div className="relative rounded-2xl overflow-hidden bg-brand-light h-64 md:h-80">
   <Image
-    src="public/og/og.jpg"
+    src="/og/og.jpg"
     alt="Tru Flavors Culture Box – monthly curated curry kits"
     fill
     sizes="(min-width: 768px) 50vw, 100vw"
