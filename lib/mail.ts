@@ -8,9 +8,7 @@ const pass = process.env.SMTP_PASS;
 const secure = String(process.env.SMTP_SECURE || "false") === "true"; // true for 465
 
 if (!host || !user || !pass) {
-  console.warn(
-    "SMTP credentials are missing. Set SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS in your environment."
-  );
+  console.warn("SMTP credentials are missing. Set SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS.");
 }
 
 export const mailer = nodemailer.createTransport({
