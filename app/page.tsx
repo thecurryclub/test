@@ -12,7 +12,7 @@ import KPIRow from "./kpi-row";
 
 // Demand & catalog
 import BestSellers from "@/components/home/BestSellers";
-import RegionalTiles from "@/components/home/Update RegionalTiles"; // ← if your filename has a space, rename the file to UpdateRegionalTiles.tsx and update this import
+import RegionalTiles from "@/components/home/RegionalTiles"; // ← if your filename has a space, rename the file to UpdateRegionalTiles.tsx and update this import
 // If the import above errors due to filename spacing, use the older one:
 // import RegionalTiles from "@/components/home/RegionalTiles";
 
@@ -25,7 +25,7 @@ import PressStrip from "@/components/home/PressStrip";
 import MiniTestimonials from "@/components/home/MiniTestimonials";
 
 // Risk reducers / benefits
-import GoalStrip from "@/components/home/Update GoalStrip"; // Same filename note as above; otherwise use GoalStrip
+import GoalStrip from "@/components/home/GoalStrip"; // Same filename note as above; otherwise use GoalStrip
 // import GoalStrip from "@/components/home/GoalStrip";
 import Guarantee from "@/components/home/Guarantee";
 
