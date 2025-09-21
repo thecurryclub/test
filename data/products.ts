@@ -19,6 +19,7 @@ export type Product = {
   vegetarian?: boolean;
   tags?: string[]; // e.g. ["gluten-free","dairy-free","fodmap-friendly","spicy","mild","no-seed-oils","bulk","limited"]
   description?: string;
+  prepTime?: number; 
 };
 
 const PH = "/images/placeholder.svg";
