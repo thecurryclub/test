@@ -2,7 +2,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
-import { products } from "@/data/products"; // ← adjust path if different
+import { products } from "@/data/products"; // ← adjust path if your data lives elsewhere
 
 export const revalidate = 3600; // ISR: revalidate hourly
 
@@ -98,8 +98,13 @@ export default function HomePage() {
             <Link href="/products/weight-friendly" className="badge hover:bg-gray-50">
               Weight-friendly
             </Link>
-            {/* If typedRoutes is ON and you need query links, use UrlObject:
-            <Link href={{ pathname: "/products", query: { collection: "new-arrivals" } }} className="badge">New Arrivals</Link>
+            {/* If you want a query link with typedRoutes on, use UrlObject, e.g.:
+            <Link
+              href={{ pathname: "/products", query: { collection: "new-arrivals" } }}
+              className="badge hover:bg-gray-50"
+            >
+              New Arrivals
+            </Link>
             */}
           </div>
         </div>
@@ -116,14 +121,16 @@ export default function HomePage() {
 
         <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {featured.map((p: any) => {
-            const href = `/products/${p.id}`;
             const img = p.image || "/images/placeholder.svg";
+            // typedRoutes-safe dynamic route: /products/[id]
+            const productHref = { pathname: "/products/[id]", query: { id: String(p.id) } };
+
             return (
               <article
                 key={p.id}
                 className="rounded-2xl border overflow-hidden bg-white hover:shadow-soft transition-shadow"
               >
-                <Link href={href}>
+                <Link href={productHref}>
                   <div className="aspect-[4/5] bg-brand-light flex items-center justify-center">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
@@ -136,7 +143,7 @@ export default function HomePage() {
                 </Link>
                 <div className="p-4">
                   <h3 className="font-semibold leading-tight">
-                    <Link href={href} className="hover:underline">
+                    <Link href={productHref} className="hover:underline">
                       {p.name}
                     </Link>
                   </h3>
