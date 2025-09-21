@@ -1,321 +1,119 @@
-
-import type { Product } from "@/components/ProductCard";
-
-const ph = "/images/placeholder.svg";
-const IMG = {
-  chana: "/images/chana.png",
-  kerala: "/images/kerala.png",
-  goanFish: "/images/goan-fish.png",
-  moroccan: "/images/moroccan.png",
-  jerk: "/images/jerk.png",
-  thaiGreen: "/images/thai-green.png",
+// data/products.ts
+export type Product = {
+  id: string;
+  name: string;
+  price: number;
+  image?: string;
+  category:
+    | "ready-to-eat-meals"
+    | "ready-to-eat-rice"
+    | "ready-to-cook-gravy"
+    | "ready-to-cook-paste"
+    | "marinades"
+    | "chutneys"
+    | "sweets"
+    | "asian-inspired"
+    | "chinese-style"
+    | "mexican-style";
+  readyToEat?: boolean;
+  vegetarian?: boolean;
+  tags?: string[]; // e.g. ["gluten-free","dairy-free","fodmap-friendly","spicy","mild","no-seed-oils","bulk","limited"]
+  description?: string;
 };
 
+const PH = "/images/placeholder.svg";
+
 export const products: Product[] = [
-  // ===== HEAT & EAT (≤ 5 min) =====
-  {
-    id:"dal-makhani",
-    name:"Dal Makhani (Ready to Eat)",
-    price:5.49,
-    copy:"Velvety black lentils — heat & serve comfort.",
-    image: ph,
-    tags:["ready-to-eat","vegetarian","gluten-free"],
-    ingredients:["Black lentils","Kidney beans","Tomato","Butter","Cream","Spices","Sea salt"],
-    allergens:["Dairy (butter, cream)"],
-    nutrition:{ calories: 210, fat: 9, carbs: 24, protein: 8 },
-    prepTime: 5, serves: 2, needed:["Saucepan or microwave"], chefTip:"Finish with a knob of butter and julienned ginger.",
-    readyToCook: false, readyToEat: true, vegetarian: true
-  },
-  {
-    id:"punjabi-chana",
-    name:"Punjabi Chana (Ready to Eat)",
-    price:4.99,
-    copy:"Hearty, protein-forward chickpeas in a robust masala.",
-    image: IMG.chana,
-    tags:["ready-to-eat","vegetarian","gluten-free","dairy-free","fodmap-friendly"],
-    ingredients:["Chickpeas","Tomato","Onion","Ginger","Garlic","Spices","Sea salt"],
-    allergens:[],
-    nutrition:{ calories: 190, fat: 5, carbs: 27, protein: 9 },
-    prepTime: 5, serves: 2, needed:["Saucepan or microwave"], chefTip:"Add a squeeze of lemon and fresh coriander.",
-    readyToCook: false, readyToEat: true, vegetarian: true
-  },
-  {
-    id:"kerala-coconut-pepper",
-    name:"Kerala Coconut Pepper Curry (RTE)",
-    price:5.99,
-    copy:"Creamy coconut with a peppery finish — coastal comfort.",
-    image: IMG.kerala,
-    tags:["ready-to-eat","vegetarian","gluten-free","fodmap-friendly"],
-    ingredients:["Coconut milk","Black pepper","Curry leaves","Spices","Sea salt"],
-    allergens:["Coconut"],
-    nutrition:{ calories: 220, fat: 16, carbs: 12, protein: 4 },
-    prepTime: 5, serves: 2, needed:["Saucepan or microwave"], chefTip:"Crush pepper fresh for aroma.",
-    readyToCook: false, readyToEat: true, vegetarian: true
-  },
-  {
-    id:"goan-tamarind-fish-rte",
-    name:"Goan Tamarind Fish (RTE)",
-    price:6.49,
-    copy:"Bright, tangy tamarind with coastal spice.",
-    image: IMG.goanFish,
-    tags:["ready-to-eat","gluten-free","dairy-free"],
-    ingredients:["White fish","Tamarind","Coconut","Spices","Sea salt"],
-    allergens:["Fish","Coconut"],
-    nutrition:{ calories: 240, fat: 10, carbs: 10, protein: 26 },
-    prepTime: 5, serves: 2, needed:["Saucepan or microwave"], chefTip:"Finish with coconut oil and curry leaves.",
-    readyToCook: false, readyToEat: true, vegetarian: false
-  },
-  {
-    id:"thai-green-veg-rte",
-    name:"Thai Green Veg Curry (RTE)",
-    price:5.99,
-    copy:"Herbaceous green curry with gentle heat.",
-    image: IMG.thaiGreen,
-    tags:["ready-to-eat","vegetarian","gluten-free","dairy-free"],
-    ingredients:["Coconut milk","Green chili","Kaffir lime","Basil","Vegetables","Sea salt"],
-    allergens:["Coconut"],
-    nutrition:{ calories: 210, fat: 14, carbs: 14, protein: 4 },
-    prepTime: 5, serves: 2, needed:["Saucepan or microwave"], chefTip:"Add fresh basil just before serving.",
-    readyToCook: false, readyToEat: true, vegetarian: true
-  },
-  {
-    id:"moroccan-chickpea-tagine-rte",
-    name:"Moroccan Chickpea Tagine (RTE)",
-    price:5.49,
-    copy:"Warm spices, tomatoes, and chickpeas — weeknight-easy.",
-    image: IMG.moroccan,
-    tags:["ready-to-eat","vegetarian","dairy-free"],
-    ingredients:["Chickpeas","Tomato","Onion","Ras el Hanout","Olive oil","Sea salt"],
-    allergens:[],
-    nutrition:{ calories: 195, fat: 6, carbs: 28, protein: 7 },
-    prepTime: 5, serves: 2, needed:["Saucepan or microwave"], chefTip:"Top with almonds and parsley.",
-    readyToCook: false, readyToEat: true, vegetarian: true
-  },
-  {
-    id:"jerk-beans-rte",
-    name:"Caribbean Jerk Beans (RTE)",
-    price:4.99,
-    copy:"Smoky-sweet jerk spices meet plant protein.",
-    image: IMG.jerk,
-    tags:["ready-to-eat","vegetarian","dairy-free","gluten-free"],
-    ingredients:["Beans","Scotch bonnet","Allspice","Thyme","Garlic","Sea salt"],
-    allergens:[],
-    nutrition:{ calories: 200, fat: 4, carbs: 31, protein: 9 },
-    prepTime: 5, serves: 2, needed:["Saucepan or microwave"], chefTip:"Add grilled pineapple for a tangy twist.",
-    readyToCook: false, readyToEat: true, vegetarian: true
-  },
+  // --- Ready-to-Eat (≤5 min) ---
+  { id:"dal-makhani", name:"Dal Makhani", price:7.99, image:PH, category:"ready-to-eat-meals", readyToEat:true, vegetarian:true, tags:["gluten-free"] },
+  { id:"dal-tadka", name:"Dal Tadka", price:6.99, image:PH, category:"ready-to-eat-meals", readyToEat:true, vegetarian:true, tags:["gluten-free","mild"] },
+  { id:"dal-ka-kamaal", name:"Dal Ka Kamaal", price:6.99, image:PH, category:"ready-to-eat-meals", readyToEat:true, vegetarian:true, tags:["gluten-free"] },
+  { id:"rajma-masala", name:"Rajma Masala", price:7.49, image:PH, category:"ready-to-eat-meals", readyToEat:true, vegetarian:true, tags:["gluten-free"] },
+  { id:"chana-masala", name:"Chana Masala", price:6.99, image:PH, category:"ready-to-eat-meals", readyToEat:true, vegetarian:true, tags:["gluten-free"] },
+  { id:"shahi-paneer", name:"Shahi Paneer", price:8.49, image:PH, category:"ready-to-eat-meals", readyToEat:true, vegetarian:true, tags:["gluten-free"] },
+  { id:"kadhi-pakoda", name:"Kadhi Pakoda", price:7.49, image:PH, category:"ready-to-eat-meals", readyToEat:true, vegetarian:true, tags:["gluten-free"] },
+  { id:"pav-bhaji", name:"Pav Bhaji", price:6.99, image:PH, category:"ready-to-eat-meals", readyToEat:true, vegetarian:true },
 
-  // ===== READY TO COOK (sauces, bases, marinades) =====
-  {
-    id:"bhuna-masala",
-    name:"Bhuna Masala Base",
-    price:5.99,
-    copy:"Deep, slow-cooked base for bold curries — weeknight easy.",
-    image: ph,
-    tags:["ready-to-cook","gluten-free","dairy-free"],
-    ingredients:["Onion","Tomato","Ginger","Garlic","Spices","Sea salt"],
-    allergens:[],
-    nutrition:{ calories: 120, fat: 7, carbs: 10, protein: 2 },
-    prepTime: 20, serves: 4, needed:["Protein or veg"], chefTip:"Brown your protein well before adding.",
-    readyToCook: true, readyToEat: false, vegetarian: true
-  },
-  {
-    id:"tikka-masala-base",
-    name:"Tikka Masala Cooking Sauce",
-    price:5.99,
-    copy:"Restaurant-style tikka, simplified at home.",
-    image: ph,
-    tags:["ready-to-cook","gluten-free"],
-    ingredients:["Tomato","Cream","Spices","Ginger","Garlic","Sea salt"],
-    allergens:["Dairy"],
-    nutrition:{ calories: 160, fat: 12, carbs: 10, protein: 3 },
-    prepTime: 15, serves: 4, needed:["Chicken or paneer"], chefTip:"Finish with butter for gloss.",
-    readyToCook: true, readyToEat: false, vegetarian: true
-  },
-  {
-    id:"tikka-masala-df",
-    name:"Tikka Masala (Dairy-free) Cooking Sauce",
-    price:6.29,
-    copy:"All the tikka flavor without the dairy.",
-    image: ph,
-    tags:["ready-to-cook","gluten-free","dairy-free"],
-    ingredients:["Tomato","Cashew or coconut","Spices","Ginger","Garlic","Sea salt"],
-    allergens:["Tree nuts (if cashew)","Coconut (if coconut)"],
-    nutrition:{ calories: 150, fat: 10, carbs: 11, protein: 3 },
-    prepTime: 15, serves: 4, needed:["Chicken or tofu"], chefTip:"Char your protein for smokiness.",
-    readyToCook: true, readyToEat: false, vegetarian: true
-  },
-  {
-    id:"saag-palak-base",
-    name:"Saag / Palak Base",
-    price:5.79,
-    copy:"Iron-rich greens with warming spices.",
-    image: ph,
-    tags:["ready-to-cook","vegetarian","gluten-free"],
-    ingredients:["Spinach","Mustard greens","Ginger","Garlic","Spices","Sea salt"],
-    allergens:[],
-    nutrition:{ calories: 110, fat: 6, carbs: 9, protein: 4 },
-    prepTime: 10, serves: 4, needed:["Paneer or chickpeas"], chefTip:"Blend half for silkiness, keep half rustic.",
-    readyToCook: true, readyToEat: false, vegetarian: true
-  },
-  {
-    id:"korma-base-df",
-    name:"Korma Base (Dairy-free)",
-    price:5.99,
-    copy:"Gentle, creamy curry that’s weeknight-friendly.",
-    image: ph,
-    tags:["ready-to-cook","gluten-free","dairy-free","fodmap-friendly"],
-    ingredients:["Coconut","Cashew","Onion","Spices","Sea salt"],
-    allergens:["Tree nuts","Coconut"],
-    nutrition:{ calories: 160, fat: 12, carbs: 9, protein: 3 },
-    prepTime: 15, serves: 4, needed:["Chicken or veg"], chefTip:"Toast nuts lightly to deepen flavor.",
-    readyToCook: true, readyToEat: false, vegetarian: true
-  },
-  {
-    id:"vindaloo-base",
-    name:"Vindaloo Base",
-    price:5.79,
-    copy:"Fiery vinegar-chili punch — a Goan classic.",
-    image: ph,
-    tags:["ready-to-cook","gluten-free","dairy-free","spicy"],
-    ingredients:["Chili","Vinegar","Garlic","Spices","Sea salt"],
-    allergens:[],
-    nutrition:{ calories: 90, fat: 3, carbs: 12, protein: 2 },
-    prepTime: 20, serves: 4, needed:["Pork or veg"], chefTip:"Marinate overnight for depth.",
-    readyToCook: true, readyToEat: false, vegetarian: true
-  },
-  {
-    id:"madras-base",
-    name:"Madras Curry Base",
-    price:5.49,
-    copy:"South-leaning, tomato-forward heat.",
-    image: ph,
-    tags:["ready-to-cook","gluten-free","dairy-free","spicy"],
-    ingredients:["Tomato","Chili","Curry leaves","Spices","Sea salt"],
-    allergens:[],
-    nutrition:{ calories: 100, fat: 5, carbs: 11, protein: 2 },
-    prepTime: 15, serves: 4, needed:["Lamb or jackfruit"], chefTip:"Bloom curry leaves in hot oil first.",
-    readyToCook: true, readyToEat: false, vegetarian: true
-  },
-  {
-    id:"rogan-josh-base",
-    name:"Rogan Josh Base",
-    price:6.19,
-    copy:"Kashmiri chilli richness for meats or mushrooms.",
-    image: ph,
-    tags:["ready-to-cook","gluten-free","dairy-free"],
-    ingredients:["Kashmiri chili","Tomato","Yogurt (optional)","Spices","Sea salt"],
-    allergens:[],
-    nutrition:{ calories: 120, fat: 6, carbs: 12, protein: 3 },
-    prepTime: 20, serves: 4, needed:["Lamb or mushrooms"], chefTip:"Finish with a spoon of ghee.",
-    readyToCook: true, readyToEat: false, vegetarian: true
-  },
-  {
-    id:"butter-makhani-base",
-    name:"Butter Makhani Base",
-    price:5.99,
-    copy:"Silky butter-tomato sauce for paneer or chicken.",
-    image: ph,
-    tags:["ready-to-cook","gluten-free"],
-    ingredients:["Tomato","Butter","Cream","Spices","Sea salt"],
-    allergens:["Dairy"],
-    nutrition:{ calories: 170, fat: 13, carbs: 10, protein: 3 },
-    prepTime: 15, serves: 4, needed:["Paneer or chicken"], chefTip:"Add kasoori methi at the end.",
-    readyToCook: true, readyToEat: false, vegetarian: true
-  },
-  {
-    id:"smoky-tikka-df",
-    name:"Smoky Tikka Marinade (Dairy-free)",
-    price:5.79,
-    copy:"Classic tikka flavor with a clean, dairy-free finish.",
-    image: ph,
-    tags:["ready-to-cook","marinade","gluten-free","dairy-free"],
-    ingredients:["Spices","Tomato","Ginger","Garlic","Acidulant","Sea salt"],
-    allergens:[],
-    nutrition:{ calories: 70, fat: 2, carbs: 10, protein: 2 },
-    prepTime: 10, serves: 3, needed:["Protein or veg"], chefTip:"Roast at high heat for charred edges.",
-    readyToCook: true, readyToEat: false, vegetarian: true
-  },
+  // --- RTE Rice / Biryani ---
+  { id:"veg-pulav", name:"Vegetable Pulav (RTE)", price:6.49, image:PH, category:"ready-to-eat-rice", readyToEat:true, vegetarian:true, tags:["gluten-free"] },
+  { id:"hyderabadi-biryani-rte", name:"Hyderabadi Biryani (RTE)", price:8.99, image:PH, category:"ready-to-eat-rice", readyToEat:true, tags:["spicy"] },
+  { id:"basmati-steamed", name:"Steamed Basmati (RTE)", price:3.99, image:PH, category:"ready-to-eat-rice", readyToEat:true, vegetarian:true, tags:["gluten-free"] },
 
-  // ===== GLOBAL SAUCES / PASTES =====
-  {
-    id:"thai-green-paste",
-    name:"Thai Green Curry Paste",
-    price:4.99,
-    copy:"Fresh, zesty paste for fast weeknight curries.",
-    image: IMG.thaiGreen,
-    tags:["ready-to-cook","dairy-free","gluten-free"],
-    ingredients:["Green chili","Lemongrass","Galangal","Kaffir lime","Basil","Sea salt"],
-    allergens:[],
-    nutrition:{ calories: 35, fat: 1, carbs: 5, protein: 1 },
-    prepTime: 15, serves: 6, needed:["Coconut milk, veg or protein"], chefTip:"Pound basil fresh at the end.",
-    readyToCook: true, readyToEat: false, vegetarian: true
-  },
-  {
-    id:"thai-red-paste",
-    name:"Thai Red Curry Paste",
-    price:4.99,
-    copy:"Balanced heat and aromatics for red curries.",
-    image: ph,
-    tags:["ready-to-cook","dairy-free","gluten-free","spicy"],
-    ingredients:["Red chili","Garlic","Galangal","Kaffir lime","Shrimp paste (optional)","Sea salt"],
-    allergens:["Shellfish (if using shrimp paste)"],
-    nutrition:{ calories: 35, fat: 1, carbs: 5, protein: 1 },
-    prepTime: 15, serves: 6, needed:["Coconut milk, veg or protein"], chefTip:"Toast paste in oil before adding liquid.",
-    readyToCook: true, readyToEat: false, vegetarian: true
-  },
-  {
-    id:"moroccan-chermoula",
-    name:"Moroccan Chermoula Sauce",
-    price:4.79,
-    copy:"Herby, citrusy sauce for fish or veg.",
-    image: IMG.moroccan,
-    tags:["ready-to-cook","dairy-free","gluten-free"],
-    ingredients:["Coriander","Parsley","Garlic","Lemon","Spices","Olive oil","Sea salt"],
-    allergens:[],
-    nutrition:{ calories: 60, fat: 5, carbs: 3, protein: 1 },
-    prepTime: 10, serves: 6, needed:["Fish or veg"], chefTip:"Marinate 30 minutes for best flavor.",
-    readyToCook: true, readyToEat: false, vegetarian: true
-  },
-  {
-    id:"jamaican-jerk-marinade",
-    name:"Jamaican Jerk Marinade",
-    price:4.79,
-    copy:"Allspice, thyme, and Scotch bonnet kick.",
-    image: IMG.jerk,
-    tags:["ready-to-cook","dairy-free","gluten-free","marinade","spicy"],
-    ingredients:["Allspice","Thyme","Scotch bonnet","Garlic","Vinegar","Sea salt"],
-    allergens:[],
-    nutrition:{ calories: 50, fat: 2, carbs: 7, protein: 1 },
-    prepTime: 10, serves: 6, needed:["Chicken, tofu, or veg"], chefTip:"Grill over medium heat to avoid burning sugars.",
-    readyToCook: true, readyToEat: false, vegetarian: true
-  },
+  // --- Ready-to-Cook Gravies / Bases ---
+  { id:"yellow-base-gravy", name:"Yellow Base Gravy", price:5.99, image:PH, category:"ready-to-cook-gravy", tags:["bulk"] },
+  { id:"white-base-gravy", name:"White Base Gravy", price:5.99, image:PH, category:"ready-to-cook-gravy", tags:["bulk"] },
+  { id:"onion-gravy", name:"Onion Gravy", price:5.99, image:PH, category:"ready-to-cook-gravy" },
+  { id:"tomato-gravy", name:"Tomato Gravy", price:5.99, image:PH, category:"ready-to-cook-gravy" },
+  { id:"chopped-masala", name:"Chopped Masala Base", price:6.49, image:PH, category:"ready-to-cook-gravy" },
+  { id:"onion-tomato-bhuna", name:"Onion-Tomato Bhuna Base", price:6.49, image:PH, category:"ready-to-cook-gravy" },
+  { id:"roganjosh-brown", name:"Roganjosh Brown Base", price:6.99, image:PH, category:"ready-to-cook-gravy" },
+  { id:"tomato-makhni-base", name:"Tomato Makhni Base", price:6.99, image:PH, category:"ready-to-cook-gravy" },
+  { id:"butter-chicken-gravy", name:"Butter Chicken Gravy", price:7.49, image:PH, category:"ready-to-cook-gravy" },
+  { id:"chicken-tikka-masala-base", name:"Chicken Tikka Masala Base", price:7.49, image:PH, category:"ready-to-cook-gravy" },
+  { id:"veg-all-purpose", name:"All-Purpose Veg Gravy", price:6.49, image:PH, category:"ready-to-cook-gravy" },
+  { id:"kadhai-gravy", name:"Kadhai Masala Gravy", price:6.49, image:PH, category:"ready-to-cook-gravy" },
+  { id:"chettinad-base", name:"Chettinad Masala Base", price:6.99, image:PH, category:"ready-to-cook-gravy", tags:["spicy"] },
+  { id:"gongura-gravy", name:"Gongura (Sorrel) Gravy", price:7.49, image:PH, category:"ready-to-cook-gravy" },
+  { id:"andhra-chicken-curry-base", name:"Andhra Chicken Curry Base", price:7.49, image:PH, category:"ready-to-cook-gravy", tags:["spicy"] },
+  { id:"fish-pulusu-base", name:"Fish Pulusu Base", price:7.49, image:PH, category:"ready-to-cook-gravy", tags:["spicy"] },
 
-  // ===== LIGHT / WEIGHT-FRIENDLY =====
-  {
-    id:"lemon-pepper-tadka",
-    name:"Lemon Pepper Tadka",
-    price:3.99,
-    copy:"Bright tempering for lentils and veg; weight-friendly.",
-    image: ph,
-    tags:["ready-to-cook","dairy-free","gluten-free","weight-friendly"],
-    ingredients:["Lemon","Black pepper","Mustard seed","Curry leaves","Sea salt"],
-    allergens:[],
-    nutrition:{ calories: 25, fat: 1, carbs: 3, protein: 0 },
-    prepTime: 5, serves: 8, needed:["Lentils/veg"], chefTip:"Bloom mustard seeds till they pop.",
-    readyToCook: true, readyToEat: false, vegetarian: true
-  },
-  {
-    id:"ginger-scallion-stir",
-    name:"Ginger Scallion Stir-Fry Sauce",
-    price:4.29,
-    copy:"Clean, gingery lift for quick stir-fries.",
-    image: ph,
-    tags:["ready-to-cook","dairy-free","gluten-free","weight-friendly"],
-    ingredients:["Ginger","Spring onion","Rice vinegar","Sea salt"],
-    allergens:[],
-    nutrition:{ calories: 30, fat: 1, carbs: 4, protein: 0 },
-    prepTime: 5, serves: 6, needed:["Veg or protein"], chefTip:"Add at the end to keep it bright.",
-    readyToCook: true, readyToEat: false, vegetarian: true
-  }
+  // --- Ready-to-Cook Pastes ---
+  { id:"dum-biryani-paste", name:"Dum Biryani Paste", price:5.99, image:PH, category:"ready-to-cook-paste" },
+  { id:"hyderabadi-biryani-paste", name:"Hyderabadi Biryani Paste", price:5.99, image:PH, category:"ready-to-cook-paste" },
+  { id:"mirch-ka-salan-paste", name:"Mirch-ka-Salan Paste", price:5.49, image:PH, category:"ready-to-cook-paste" },
+  { id:"sambar-paste", name:"Sambar Paste", price:4.99, image:PH, category:"ready-to-cook-paste", vegetarian:true },
+
+  // --- Marinades ---
+  { id:"lasooni-marinade", name:"Lasooni (Garlic) Marinade", price:4.99, image:PH, category:"marinades" },
+  { id:"red-tandoori-marinade", name:"Red Tandoori Marinade", price:4.99, image:PH, category:"marinades", tags:["spicy"] },
+  { id:"malai-tikka-marinade", name:"Malai Tikka Marinade", price:4.99, image:PH, category:"marinades" },
+  { id:"reshmi-tikka-marinade", name:"Reshmi Tikka Marinade", price:4.99, image:PH, category:"marinades" },
+  { id:"hariyali-marinade", name:"Hariyali (Herb) Marinade", price:4.99, image:PH, category:"marinades" },
+  { id:"kali-mirch-marinade", name:"Kali Mirch (Black Pepper) Marinade", price:4.99, image:PH, category:"marinades" },
+
+  // --- Chutneys & Condiments ---
+  { id:"coconut-chutney-white", name:"Coconut Chutney — White", price:3.99, image:PH, category:"chutneys", vegetarian:true },
+  { id:"coconut-chutney-green", name:"Coconut Chutney — Green", price:3.99, image:PH, category:"chutneys", vegetarian:true },
+  { id:"red-tomato-chutney", name:"Red Tomato Chutney", price:3.49, image:PH, category:"chutneys", vegetarian:true },
+
+  // --- Sweets ---
+  { id:"moong-dal-halwa", name:"Moong Dal Halwa", price:6.99, image:PH, category:"sweets", vegetarian:true },
+  { id:"carrot-halwa", name:"Carrot Halwa", price:6.99, image:PH, category:"sweets", vegetarian:true },
+  { id:"gulab-jamun", name:"Gulab Jamun", price:5.99, image:PH, category:"sweets", vegetarian:true },
+
+  // --- Asian-Inspired (RTC Bases) ---
+  { id:"thai-green-base", name:"Thai-Style Green Coconut Base", price:6.99, image:PH, category:"asian-inspired", vegetarian:true, tags:["mild"] },
+  { id:"thai-red-base", name:"Thai-Style Red Coconut Base", price:6.99, image:PH, category:"asian-inspired", tags:["spicy"] },
+  { id:"teriyaki-glaze", name:"Teriyaki-Inspired Glaze", price:4.99, image:PH, category:"asian-inspired", tags:["no-seed-oils"] },
+  { id:"sesame-ginger-stirfry", name:"Sesame-Ginger Stir-Fry Sauce", price:4.99, image:PH, category:"asian-inspired", tags:["no-seed-oils"] },
+  { id:"miso-coconut-broth", name:"Miso-Coconut Broth Starter", price:5.99, image:PH, category:"asian-inspired", vegetarian:true },
+
+  // --- Chinese-Style (RTC Bases) ---
+  { id:"kung-pao-style", name:"Kung Pao-Style Base", price:5.49, image:PH, category:"chinese-style", tags:["spicy"] },
+  { id:"black-bean-style", name:"Black Bean-Style Sauce", price:5.49, image:PH, category:"chinese-style" },
+  { id:"chili-garlic-style", name:"Chili-Garlic Stir-Fry Base", price:5.49, image:PH, category:"chinese-style", tags:["spicy"] },
+  { id:"sweet-sour-style", name:"Sweet-and-Sour-Style Sauce", price:4.99, image:PH, category:"chinese-style" },
+  { id:"mapo-style-base", name:"Mapo-Style Base", price:5.49, image:PH, category:"chinese-style", tags:["spicy"] },
+
+  // --- Mexican-Style (RTC Bases) ---
+  { id:"ancho-chipotle-base", name:"Ancho-Chipotle Cooking Base", price:5.99, image:PH, category:"mexican-style", tags:["spicy"] },
+  { id:"tomatillo-verde-base", name:"Tomatillo-Style Verde Base", price:5.99, image:PH, category:"mexican-style", tags:["mild"] },
+  { id:"mole-inspired-base", name:"Mole-Inspired Cocoa-Chili Base", price:6.49, image:PH, category:"mexican-style" },
+  { id:"adobo-marinade", name:"Adobo-Style Marinade", price:4.99, image:PH, category:"mexican-style" },
+  { id:"fajita-pepper-onion", name:"Fajita-Style Pepper & Onion Base", price:5.49, image:PH, category:"mexican-style" },
 ];
+
+export const ALL_CATEGORIES: { key: Product["category"]; label: string }[] = [
+  { key: "ready-to-eat-meals", label: "Ready-to-Eat Meals" },
+  { key: "ready-to-eat-rice", label: "RTE Rice & Biryani" },
+  { key: "ready-to-cook-gravy", label: "RTC Gravies" },
+  { key: "ready-to-cook-paste", label: "RTC Pastes" },
+  { key: "marinades", label: "Marinades" },
+  { key: "chutneys", label: "Chutneys" },
+  { key: "sweets", label: "Sweets" },
+  { key: "asian-inspired", label: "Asian-Inspired" },
+  { key: "chinese-style", label: "Chinese-Style" },
+  { key: "mexican-style", label: "Mexican-Style" },
+];
+
+export const TAGS = ["gluten-free","dairy-free","fodmap-friendly","spicy","mild","no-seed-oils","bulk","limited"] as const;
