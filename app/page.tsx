@@ -40,30 +40,18 @@ export default function Page() {
       <HeroV4 />
       <section className="relative"><BadgesMarquee /></section>
 
+
+      <section className="container-max mt-12"><CultureTeaser /></section>
+      <section className="container-max mt-12"><MiniTestimonials /></section>      
       <section className="container-max mt-12"><ImpactRow /></section>
       <section className="container-max mt-8"><TrustRow /></section>
-
+      <section className="container-max mt-12"><BestSellers /></section>
       {/* 3) Investor-friendly KPI row (inline) */}
       <section className="container-max mt-10">
         <KPIStrip />
       </section>
-
-      <section className="container-max mt-12"><BestSellers /></section>
       <section className="container-max mt-12"><RegionalTiles /></section>
-      <section className="container-max mt-12"><CultureTeaser /></section>
 
-
-      <section className="container-max mt-12"><EvidenceRow /></section>
-      <section className="container-max mt-12"><MiniTestimonials /></section>
-
-      <section className="container-max mt-12"><GoalStrip /></section>
-      <section className="container-max mt-12"><Guarantee /></section>
-
-      
-
-      <section className="container-max mt-8"><WhyItWorks /></section>
-      <section className="container-max mt-12"><PressStrip /></section>
-      
       <StickyCTA />
     </main>
   );
