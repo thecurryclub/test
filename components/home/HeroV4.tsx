@@ -11,8 +11,8 @@ export default function HeroV4() {
           {/* Background image (decorative) */}
           <div className="absolute inset-0">
             <Image
-              src="/hero.jpg"         // keep/replace with your asset
-              alt=""                   // decorative
+              src="/hero.jpg"   // ensure /public/hero.jpg exists
+              alt=""             // decorative background
               fill
               priority
               sizes="100vw"
@@ -20,10 +20,10 @@ export default function HeroV4() {
             />
           </div>
 
-          {/* Content card (same placement/shape as V3) */}
+          {/* Content card */}
           <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 md:py-16">
             <div className="mx-auto max-w-3xl rounded-[28px] bg-white/85 p-6 shadow-xl ring-1 ring-orange-200/40 backdrop-blur md:p-10">
-              {/* === V2 CONTENT START === */}
+              {/* From HeroV2 (content/styling) */}
               <p className="mb-2 text-sm uppercase tracking-wider text-orange-700/80">
                 Flavor × Wellness
               </p>
@@ -73,11 +73,10 @@ export default function HeroV4() {
                 Shown for inspiration. Pair our sauces with your preferred
                 proteins &amp; vegetables.
               </p>
-              {/* === V2 CONTENT END === */}
             </div>
           </div>
 
-          {/* Soft ambient blobs (optional subtlety from V2) */}
+          {/* Optional soft ambient blobs */}
           <div className="pointer-events-none absolute -left-24 top-10 h-56 w-56 rounded-full bg-orange-100/70 blur-3xl" />
           <div className="pointer-events-none absolute bottom-6 -right-24 h-56 w-56 rounded-full bg-amber-100/70 blur-3xl" />
         </div>
