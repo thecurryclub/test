@@ -41,7 +41,7 @@ export default function HeroV3() {
                 <Link href="/products" className="btn btn-primary">
                   Shop Products
                 </Link>
-                <Link href="/subscribe" className="btn btn-ghost">
+                <Link href="/subscribe" className="btn btn-primary">
                   Subscribe — Culture Box
                 </Link>
               </div>
