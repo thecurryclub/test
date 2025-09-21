@@ -17,7 +17,7 @@ export default function DietFilters({ products }: Props) {
 
   const visible = products.filter(p => {
     const matchesQuery = p.name.toLowerCase().includes(query.toLowerCase());
-    const matchesFilters = filters.every(f => p.tags.includes(f));
+    const matchesFilters = filters.length === 0 || filters.every((f) => (p.tags ?? []).includes(f));
     return matchesQuery && matchesFilters;
   });
 
