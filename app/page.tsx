@@ -38,7 +38,7 @@ export default function Page() {
     <main className="relative">
       {/* New full-bleed hero with V2 content */}
       <HeroV4 />
-      <section className="container-max mt-8"><BadgesMarquee /></section>
+      <section className="relative"><BadgesMarquee /></section>
 
       <section className="container-max mt-8"><TrustRow /></section>
       <section className="container-max mt-8"><WhyItWorks /></section>
