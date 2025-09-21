@@ -1,7 +1,7 @@
 // app/page.tsx
 import type { Metadata } from "next";
 
-import Hero3 from "@/components/home/Hero3";
+import HeroV3 from "@/components/home/HeroV3";
 import TrustRow from "@/components/home/TrustRow";
 import WhyItWorks from "@/components/home/WhyItWorks";
 import HowItWorks from "@/components/home/HowItWorks";
