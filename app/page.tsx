@@ -1,7 +1,7 @@
 // app/page.tsx
 import type { Metadata } from "next";
 
-import HeroV2 from "@/components/home/HeroV2";
+import Hero from "@/components/home/Hero";
 import TrustRow from "@/components/home/TrustRow";
 import WhyItWorks from "@/components/home/WhyItWorks";
 import HowItWorks from "@/components/home/HowItWorks";
@@ -46,7 +46,7 @@ export default function Page() {
   return (
     <main className="relative">
       {/* 1) Refined hero */}
-      <HeroV2 />
+      <Hero />
 
       {/* 2) Trust & how it works */}
       <section className="container-max mt-8">
