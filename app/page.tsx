@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     description:
       "Chef-level curries in ≤ 5 minutes. Clean, gut-friendly, zero compromise.",
     url: "https://truflavors.org/",
-    images: [{ url: "/images/og.png" }],
+    images: [{ url: "/public/og/og.jpg" }],
   },
 };
 
