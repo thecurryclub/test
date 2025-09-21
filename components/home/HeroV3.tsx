@@ -37,14 +37,10 @@ export default function HeroV3() {
                 No artificial colors or flavors.
               </p>
 
-              <div className="mt-6 flex flex-wrap gap-3">
-                <Link href="/products" className="btn btn-primary">
-                  Shop Products
-                </Link>
-                <Link href="/subscribe" className="btn btn-primary">
-                  Subscribe — Culture Box
-                </Link>
-              </div>
+            <div className="mt-6 flex flex-wrap gap-3">
+            <Link href="/products"><Button>Shop Products</Button></Link>
+            <Link href="/subscribe"><Button variant="ghost">Join Culture Box</Button></Link>
+            </div>
 
               <p className="mt-3 text-xs text-gray-500">
                 No seed oils • Gluten-free options • Dairy-free options • FODMAP-friendly*
