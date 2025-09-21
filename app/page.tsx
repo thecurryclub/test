@@ -40,23 +40,66 @@ export default function Page() {
       <HeroV4 />
       <section className="relative"><BadgesMarquee /></section>
 
+      <section className="container-max mt-12"><ImpactRow /></section>
       <section className="container-max mt-8"><TrustRow /></section>
-      <section className="container-max mt-8"><WhyItWorks /></section>
+
+      {/* 3) Investor-friendly KPI row (inline) */}
+      <section className="container-max mt-10">
+        <KPIStrip />
+      </section>
 
       <section className="container-max mt-12"><BestSellers /></section>
       <section className="container-max mt-12"><RegionalTiles /></section>
       <section className="container-max mt-12"><CultureTeaser /></section>
 
-      <section className="container-max mt-12"><ImpactRow /></section>
+
       <section className="container-max mt-12"><EvidenceRow /></section>
-      <section className="container-max mt-12"><PressStrip /></section>
       <section className="container-max mt-12"><MiniTestimonials /></section>
 
       <section className="container-max mt-12"><GoalStrip /></section>
       <section className="container-max mt-12"><Guarantee /></section>
 
+      
 
+      <section className="container-max mt-8"><WhyItWorks /></section>
+      <section className="container-max mt-12"><PressStrip /></section>
+      
       <StickyCTA />
     </main>
+  );
+}
+
+
+
+/**
+ * Inline KPI component (investor-friendly snapshot).
+ * Replace placeholder numbers with real metrics as you get them.
+ * If you wish, move this into components/home/KPIStrip.tsx later.
+ */
+function KPIStrip() {
+  const KPIS = [
+    { label: "Orders fulfilled", value: "12,540+", sub: "last 12 months" },
+    { label: "Repeat purchase rate", value: "38%", sub: "cohort avg." },
+    { label: "Avg. prep time", value: "≤ 5 min", sub: "RTE; RTC 10–20" },
+    { label: "Retail partners", value: "120+", sub: "UK & EU" },
+  ];
+  return (
+    <div className="rounded-3xl border bg-white p-6 md:p-8">
+      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {KPIS.map((k) => (
+          <article key={k.label} className="rounded-2xl border p-5 bg-white">
+            <div className="text-2xl md:text-3xl font-bold tracking-tight">{k.value}</div>
+            <div className="mt-1 text-sm text-gray-600">{k.label}</div>
+            {k.sub && <div className="mt-1 text-xs text-gray-500">{k.sub}</div>}
+          </article>
+        ))}
+      </div>
+
+      {/* Optional tiny policy/claims strip */}
+      <div className="mt-4 text-xs text-gray-500">
+        “FODMAP-friendly” is general guidance — individual tolerance varies. See{" "}
+        <a href="/standards-ingredients" className="link">Standards &amp; Ingredients</a>.
+      </div>
+    </div>
   );
 }
