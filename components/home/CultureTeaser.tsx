@@ -12,7 +12,16 @@ export default function CultureTeaser() {
           <p className="mt-3 text-gray-600">A new regional theme each month—3–4 kits, recipe tips, and pairing ideas. Flexible; skip or pause anytime.</p>
           <Link href="/subscribe" className="mt-6 inline-flex"><Button>Join the waitlist</Button></Link>
         </div>
-        <div className="rounded-2xl bg-brand-light h-56 flex items-center justify-center">OG image here</div>
+        <div className="relative rounded-2xl overflow-hidden bg-brand-light h-64 md:h-80">
+  <Image
+    src="/og/culture-box.png"
+    alt="Tru Flavors Culture Box – monthly curated curry kits"
+    fill
+    sizes="(min-width: 768px) 50vw, 100vw"
+    style={{ objectFit: "cover" }}
+    priority
+  />
+</div>
       </div>
     </Section>
   );
