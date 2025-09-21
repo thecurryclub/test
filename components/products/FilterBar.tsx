@@ -3,6 +3,7 @@
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
+import type { Route } from "next";            // ⬅️ add this
 import { ALL_CATEGORIES } from "@/data/products";
 
 const TAGS = [
@@ -23,7 +24,7 @@ const SORTS = [
   { key: "name", label: "Name A → Z" },
 ] as const;
 
-// Return a plain string (no const assertion) to satisfy TS
+// Return a plain string; we'll cast to Route at call-sites.
 function toUrl(base: string, params: URLSearchParams): string {
   const q = params.toString();
   return q ? `${base}?${q}` : base;
@@ -34,7 +35,6 @@ export default function FilterBar() {
   const pathname = usePathname() || "/products";
   const params = useSearchParams();
 
-  // current state
   const q = params.get("q") ?? "";
   const category = params.get("category") ?? "";
   const tag = params.get("tag") ?? "";
@@ -45,11 +45,12 @@ export default function FilterBar() {
     if (value && value.trim() !== "") next.set(key, value);
     else next.delete(key);
     next.delete("page");
-    router.push(toUrl(pathname, next));
+    const url = toUrl(pathname, next) as Route;    // ⬅️ cast here
+    router.push(url);
   }
 
   function clearAll() {
-    router.push(pathname);
+    router.push((pathname as Route));              // ⬅️ cast here
   }
 
   return (
@@ -60,14 +61,16 @@ export default function FilterBar() {
           <nav className="-mx-1 overflow-x-auto order-2 md:order-1">
             <div className="flex gap-2 px-1 pb-1">
               <Link
-                href={toUrl(
-                  "/products",
-                  new URLSearchParams([
-                    ["q", q],
-                    ["tag", tag],
-                    ["sort", sort !== "pop" ? sort : ""],
-                  ])
-                )}
+                href={
+                  toUrl(
+                    "/products",
+                    new URLSearchParams([
+                      ["q", q],
+                      ["tag", tag],
+                      ["sort", sort !== "pop" ? sort : ""],
+                    ])
+                  ) as Route                                 // ⬅️ cast for Link too
+                }
                 className={`badge whitespace-nowrap ${
                   !category ? "ring-1" : "bg-white hover:bg-gray-50"
                 }`}
@@ -80,7 +83,7 @@ export default function FilterBar() {
                 return (
                   <Link
                     key={c.key}
-                    href={toUrl("/products", p)}
+                    href={toUrl("/products", p) as Route}     // ⬅️ cast here
                     className={`badge whitespace-nowrap ${
                       category === c.key
                         ? "ring-1"
@@ -156,7 +159,6 @@ export default function FilterBar() {
               </div>
             </div>
 
-            {/* Clear */}
             {(q || category || tag || (sort && sort !== "pop")) && (
               <button
                 type="button"
