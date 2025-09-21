@@ -20,6 +20,14 @@ export type Product = {
   tags?: string[]; // e.g. ["gluten-free","dairy-free","fodmap-friendly","spicy","mild","no-seed-oils","bulk","limited"]
   description?: string;
   prepTime?: number; 
+    nutrition?: {
+    calories?: number; // per serving
+    fat?: number;      // g per serving
+    protein?: number;  // optional, for future
+    carbs?: number;
+    sugar?: number;
+    fiber?: number;
+  };
 };
 
 const PH = "/images/placeholder.svg";
